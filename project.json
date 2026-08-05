@@ -1,0 +1,18 @@
+{
+  "project_title": "Land-Use and Land-Cover Change in Ibadan Metropolitan Area (2013\u20132023)",
+  "repository_name": "ibadan-lulc-change",
+  "description": "Remote-sensing analysis of land-use and land-cover change in Ibadan Metropolitan Area using Landsat and Random Forest classification (2013\u20132023).",
+  "topics": [
+    "gis",
+    "remote-sensing",
+    "land-use-land-cover",
+    "random-forest",
+    "google-earth-engine",
+    "urban-growth",
+    "change-detection",
+    "ibadan",
+    "nigeria",
+    "spatial-analysis"
+  ],
+  "author": "Abdullah Abdazeez Ayomide"
+}

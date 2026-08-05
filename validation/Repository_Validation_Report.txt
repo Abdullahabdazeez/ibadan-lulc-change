@@ -1,0 +1,2 @@
+VALIDATION PASSED
+Repository structure, key statistics, raster classes, CRS, resolution, and file sizes are valid.

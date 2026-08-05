@@ -1,0 +1,5 @@
+system:index,area_ha,area_sqkm,class_code,class_name,year,.geo
+0,128449.28200205481,1284.4928200205482,1,Built-up,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+1,189484.1236144051,1894.841236144051,2,Vegetation,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+2,502.3255929541496,5.023255929541496,3,Water,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
+3,2191.6405944249063,21.916405944249064,4,Bare soil,2023,"{""type"":""MultiPoint"",""coordinates"":[]}"
