@@ -1,92 +1,84 @@
 <p align="center">
-  <img src="assets/project-cover.png" alt="Ibadan land-use and land-cover change, 2013–2023" width="100%">
+  <img src="assets/project-cover.png" alt="Ibadan land-cover change project" width="100%">
 </p>
 
-# Land-Use and Land-Cover Change in Ibadan Metropolitan Area (2013–2023)
+# Ibadan Land-Cover Change, 2013–2023
 
-Ibadan’s outward expansion is changing the balance between urban development and natural land cover across its eleven metropolitan LGAs. This project used Landsat 8 surface-reflectance imagery, spectral indices, Dynamic World reference information, and separate Random Forest models to map built-up land, vegetation, water, and bare soil in 2013 and 2023. Post-classification comparison was then used to quantify net change, identify the main conversion pathways, and map where new development occurred.
+> **Audit status — reconstruction in progress**
+>
+> The results currently stored in this repository came from the original workflow and are retained for transparency. A later forensic review could not recover adequate independent reference samples, confusion matrices or acquisition-date evidence for the published accuracy and change claims. Those figures are therefore **superseded and should not be cited as validated results**.
 
-Built-up land increased from **604.85 km² to 1,284.49 km²**, representing a net gain of **679.64 km² (112.36%)**. Vegetation declined by **689.21 km²**, and the transition matrix showed that **723.18 km² of vegetation changed to built-up land**. Classification achieved **92.34% overall accuracy (Kappa 0.895)** for 2013 and **97.04% (Kappa 0.961)** for 2023. The results provide spatial evidence for growth-management, infrastructure coordination, green-space protection, and continued monitoring of metropolitan expansion.
+## Why the project is being reconstructed
 
-| Project detail | Information |
-|---|---|
-| **Study area** | Eleven LGAs in Ibadan Metropolitan Area, Oyo State, Nigeria |
-| **Period** | 2013–2023 |
-| **Mapped area** | Approximately 3,206.26 km² |
-| **Primary imagery** | Landsat 8 Collection 2 Level-2 surface reflectance |
-| **Resolution** | 30 m |
-| **Classification** | Separate four-class Random Forest models, 300 trees |
-| **Projection** | WGS 84 / UTM Zone 31N (EPSG:32631) |
+The original study classified built-up land, vegetation, water and bare soil from Landsat imagery and compared the 2013 and 2023 maps. During a 2026 scientific audit, I found that the repository did not contain enough evidence to independently verify:
 
-## Key findings
+- the reported 2013 and 2023 accuracy figures;
+- the independence of the original calibration and validation samples;
+- seasonal comparability between the two observation years; and
+- the headline land-cover change estimates.
 
-- Built-up land expanded by **679.64 km²**, increasing its share of the mapped area from **18.86% to 40.06%**.
-- Vegetation decreased by **689.21 km²**, falling from **80.59% to 59.10%** of the study area.
-- **Vegetation → built-up** was the dominant transition, covering **723.18 km²**.
-- Built-up persistence accounted for **557.16 km²**, while **1,849.84 km²** remained vegetated.
-- The 2023 model produced the stronger validation result: **97.04% overall accuracy** and **0.961 Kappa**.
+I therefore started a full reconstruction instead of continuing to present the earlier results as final.
 
-## Project maps
+## Reconstruction completed so far
 
-<table>
-<tr>
-<td width="50%"><img src="outputs/maps/01_lulc_2013.png" alt="Ibadan LULC 2013"><br><b>2013 land cover</b></td>
-<td width="50%"><img src="outputs/maps/02_lulc_2023.png" alt="Ibadan LULC 2023"><br><b>2023 land cover</b></td>
-</tr>
-<tr>
-<td width="50%"><img src="outputs/maps/03_built_up_gain_2013_2023.png" alt="Built-up gain"><br><b>New built-up land</b></td>
-<td width="50%"><img src="outputs/maps/04_major_transitions_2013_2023.png" alt="Major transitions"><br><b>Major land-cover transitions</b></td>
-</tr>
-</table>
+The revised workflow now includes:
 
-## Analytical workflow
+- seasonally matched April–June Landsat composites for both years;
+- six surface-reflectance bands and NDVI, NDBI and MNDWI predictors;
+- a human-reviewed reference set;
+- nested, stratified out-of-fold validation;
+- explicit checks for overlap between model-development and validation records; and
+- a strict common spatial mask for year-to-year comparison.
 
-<p align="center"><img src="outputs/charts/00_workflow.png" alt="Analytical workflow" width="100%"></p>
+The current leakage-free model was evaluated on 182 human-reference records and produced:
 
-The workflow applies QA-based masking and surface-reflectance scaling, builds spectral composites and indices, prepares balanced reference samples, trains separate 2013 and 2023 Random Forest classifiers, evaluates performance with held-out validation samples, and performs post-classification change analysis. The complete Earth Engine implementation is available in [`scripts/gee/ibadan_lulc_final_gee_script.js`](scripts/gee/ibadan_lulc_final_gee_script.js).
+| Metric | Current reconstruction result |
+|---|---:|
+| Overall accuracy | 78.57% |
+| Balanced accuracy | 71.46% |
+| Macro F1 | 72.51% |
+| Kappa | 0.639 |
+| Built-up precision | 69.23% |
+| Built-up recall | 52.94% |
 
-## Quantitative results
+These results are more modest than the original figures but are supported by a stronger validation design.
 
-<p align="center"><img src="outputs/charts/01_area_comparison.png" alt="Area comparison" width="78%"></p>
-<p align="center"><img src="outputs/charts/02_net_change.png" alt="Net change" width="78%"></p>
-<p align="center"><img src="outputs/charts/03_transition_matrix.png" alt="Transition matrix" width="70%"></p>
+## Current limitation
 
-| Class | 2013 area (km²) | 2023 area (km²) | Net change (km²) | Change (%) |
-|---|---:|---:|---:|---:|
-| Built-up | 604.85 | 1,284.49 | +679.64 | +112.36 |
-| Vegetation | 2,584.05 | 1,894.84 | −689.21 | −26.67 |
-| Water | 13.74 | 5.02 | −8.72 | −63.44 |
-| Bare soil | 3.62 | 21.92 | +18.30 | +505.46 |
+The first common-mask reconstruction still showed an implausible class pattern, especially unusually extensive water and very limited bare soil. Its audit therefore ended with **CLASS_PATTERN_REVIEW_REQUIRED**.
 
-Water and bare-soil results should be interpreted carefully because these classes occupy small areas and are especially sensitive to seasonal and spectral variation.
+A targeted human-review and deployment-repair stage began but has not yet been completed. For that reason:
 
-## Planning relevance
-
-The analysis shows that metropolitan expansion was driven mainly by the conversion of vegetated land into built-up surfaces. The mapped growth pattern can support development monitoring, infrastructure phasing, peri-urban growth management, green-space protection, and the identification of locations requiring more detailed planning assessment. The outputs are intended as metropolitan-scale evidence rather than parcel-level development approval data.
+- no revised land-cover area table is presented as final;
+- no revised change statistic is promoted as authoritative;
+- the old maps and tables remain historical repository material; and
+- the project should currently be described as **under reconstruction**, not completed.
 
 ## Repository contents
 
+The existing folders preserve the original workflow, outputs and supporting files:
+
 ```text
 .
-├── assets/                     # Project cover and social-preview graphic
-├── data/processed/             # Final rasters, tables, and boundary files
-├── docs/                       # Data, methodology, results, and limitations
-├── notebooks/                  # Results-review notebook
-├── outputs/maps/               # Publication-ready project maps
-├── outputs/charts/             # Workflow and statistical figures
-├── outputs/tables/             # Cleaned summary and validation tables
-├── scripts/gee/                # Full Google Earth Engine workflow
-├── scripts/python/             # Local result-reproduction script
-└── validation/                 # Repository validation outputs
+├── assets/                 # Cover and preview graphics
+├── data/processed/         # Superseded original rasters and tables
+├── docs/                   # Original project documentation
+├── notebooks/              # Results-review notebook
+├── outputs/                # Superseded original maps, charts and summaries
+├── scripts/                # Original Earth Engine and Python scripts
+└── validation/             # Repository-level file checks
 ```
 
-## Reproducibility
+Repository validation confirms that files are present and readable; it does not establish scientific accuracy.
 
-1. Open the GEE script in the Earth Engine Code Editor and confirm the study-area and imagery collections.
-2. Run the workflow to recreate the classified rasters and exported tables.
-3. Install the local requirements with `pip install -r requirements.txt`.
-4. Run `python scripts/python/reproduce_summary.py` to verify the supplied tables and raster properties.
-5. Review [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) before interpreting the results.
+## Next steps
+
+1. Complete the remaining blinded human review.
+2. Repair the built-up/vegetation deployment boundary.
+3. Reclassify both years with the accepted model.
+4. Inspect class patterns and spatial plausibility.
+5. Recalculate change on the strict common mask.
+6. Replace the superseded repository outputs only after the final validation gate passes.
 
 ## Author
 
@@ -99,4 +91,4 @@ Geo-spatial Planner | GIS & Remote Sensing Analyst
 
 ## Citation and licence
 
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Code is released under the MIT License. Source imagery and administrative data remain subject to their providers’ terms.
+The code and original documentation remain available under the MIT License. The numerical results currently stored in the repository should not be cited as validated findings while reconstruction is in progress.
