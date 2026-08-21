@@ -17,6 +17,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - run: pip install pandas numpy rasterio
+      - run: pip install pandas
 
       - run: python validation/validate_repository.py
