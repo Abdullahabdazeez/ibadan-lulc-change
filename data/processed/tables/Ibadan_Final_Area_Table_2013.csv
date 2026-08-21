@@ -1,5 +1,5 @@
-system:index,area_ha,area_sqkm,class_code,class_name,year,.geo
-0,60485.16250083785,604.8516250083785,1,Built-up,2013,"{""type"":""MultiPoint"",""coordinates"":[]}"
-1,258405.03317634153,2584.050331763415,2,Vegetation,2013,"{""type"":""MultiPoint"",""coordinates"":[]}"
-2,1373.8668959088975,13.738668959088974,3,Water,2013,"{""type"":""MultiPoint"",""coordinates"":[]}"
-3,361.9789004007978,3.619789004007978,4,Bare soil,2013,"{""type"":""MultiPoint"",""coordinates"":[]}"
+Year,Class_Code,Class,Pixels,Area_km2,Percent
+2013,1,Built-up,110962,99.8658,3.1008631455811684
+2013,2,Vegetation,3458037,3112.2333,96.63578062179904
+2013,3,Water,5626,5.0634,0.15722009387934294
+2013,4,Bare soil,3798,3.4182,0.10613613874044517
