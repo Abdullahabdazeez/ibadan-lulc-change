@@ -1,11 +1,11 @@
 cff-version: 1.2.0
-message: "If you use this project, please cite it using the metadata below."
+message: "If you use this project, please cite the final reconstructed and frozen version described by this metadata."
 title: "Land-Use and Land-Cover Change in Ibadan Metropolitan Area (2013–2023)"
 type: software
 authors:
   - family-names: "Ayomide"
     given-names: "Abdullah Abdazeez"
-date-released: 2026-08-05
+date-released: 2026-08-21
 repository-code: "https://github.com/Abdullahabdazeez/ibadan-lulc-change"
 license: MIT
 keywords:
@@ -13,4 +13,6 @@ keywords:
   - remote sensing
   - land-use change
   - Random Forest
+  - urban growth
   - Ibadan
+  - Nigeria
