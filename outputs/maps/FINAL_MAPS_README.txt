@@ -1,0 +1,1 @@
+Final cartographic products for the accepted Ibadan LULC 2013–2023 reconstruction are stored in this folder. The repository gallery uses web-optimized copies of the final Stage-10 maps. Full-resolution publication and scientific products remain preserved in the frozen Stage-10 archive.
