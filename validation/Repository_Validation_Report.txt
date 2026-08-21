@@ -1,2 +1,7 @@
-VALIDATION PASSED
-Repository structure, key statistics, raster classes, CRS, resolution, and file sizes are valid.
+FINAL REPOSITORY VALIDATION PASSED
+
+Public numerical tables, documentation and repository-safe SVG figures are synchronized to the frozen 2026 reconstruction.
+
+Final independent validation: 14/16 locked holdout samples correct; OA=0.8750; Balanced Accuracy=0.9259; Macro F1=0.6354; Kappa=0.7935.
+
+Superseded pre-reconstruction PNG maps, charts and GeoTIFF rasters were removed from the public repository to prevent withdrawn outputs being interpreted as final scientific evidence.
