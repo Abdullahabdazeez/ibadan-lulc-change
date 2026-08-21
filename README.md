@@ -1,12 +1,38 @@
 # Ibadan Land-Cover Change, 2013–2023
 
 <p align="center">
-  <img src="outputs/charts/final_project_overview.svg" alt="Ibadan LULC 2013–2023 final project overview" width="100%">
+  <img src="https://drive.google.com/uc?export=view&id=1Qv6Llt9hapGZ1ez7a9U33gCH7kxz705N" alt="Ibadan LULC 2013–2023 publication comparison map" width="100%">
 </p>
 
 A remote-sensing and GIS assessment of how built-up land, vegetation, water and bare soil changed across the Ibadan study area between 2013 and 2023, with particular attention to the source and scale of urban expansion.
 
 ## Visual highlights
+
+### 2013–2023 land-cover comparison
+
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1Qv6Llt9hapGZ1ez7a9U33gCH7kxz705N" alt="Ibadan LULC comparison, 2013 and 2023" width="95%">
+</p>
+
+The comparison map provides the clearest visual summary of the project: the 2013 and 2023 classified surfaces are shown with a consistent legend so the outward spread of built-up land can be read directly.
+
+### Built-up expansion
+
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1uQdEK3gjVrxVxL7I__DcbSSRAAcFEedd" alt="Ibadan built-up expansion map, 2013–2023" width="95%">
+</p>
+
+This map isolates the spatial footprint of urban expansion and makes the peripheral growth pattern easier to interpret than the summary statistics alone.
+
+### Major land-cover transitions
+
+<p align="center">
+  <img src="https://drive.google.com/uc?export=view&id=1w5uQfu-ON_mk_oa9LfVkNj73lqoVL3jX" alt="Ibadan major LULC transitions, 2013–2023" width="95%">
+</p>
+
+The transition map shows where the principal class conversions occurred, including the dominant **Vegetation → Built-up** pathway.
+
+### Quantitative summaries
 
 <p align="center">
   <img src="outputs/charts/final_area_comparison.svg" alt="Final LULC area comparison for 2013 and 2023" width="95%">
@@ -113,7 +139,7 @@ For planning, the pattern supports closer monitoring of peripheral urban growth,
 
 The final reconstruction produced publication-quality 2013 and 2023 LULC maps, a comparison map, a major-transition map, a built-up-expansion map and a stable-vs-changed map. Superseded pre-reconstruction PNGs previously stored in this repository have been removed so that no outdated classification is presented as final evidence.
 
-The authoritative final raster and cartographic products are preserved in the frozen Stage-10 scientific package. The repository tables, documentation and SVG figures report only the final reconstruction values.
+The README now surfaces the principal final maps directly so a reviewer can understand the spatial results before reading the technical documentation. Full-resolution final raster and cartographic products remain preserved in the frozen Stage-10 scientific package.
 
 ## Repository structure
 
