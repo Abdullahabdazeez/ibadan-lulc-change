@@ -1,17 +1,17 @@
-system:index,area_ha,area_sqkm,from_class_code,from_class_name,to_class_code,to_class_name,transition_code,.geo
-0,55716.43120198785,557.1643120198785,1,Built-up,1,Built-up,11,"{""type"":""MultiPoint"",""coordinates"":[]}"
-1,3649.156280762173,36.49156280762173,1,Built-up,2,Vegetation,12,"{""type"":""MultiPoint"",""coordinates"":[]}"
-2,15.785892163085947,0.15785892163085946,1,Built-up,3,Water,13,"{""type"":""MultiPoint"",""coordinates"":[]}"
-3,1103.7891259245985,11.037891259245985,1,Built-up,4,Bare soil,14,"{""type"":""MultiPoint"",""coordinates"":[]}"
-4,72318.09437348225,723.1809437348224,2,Vegetation,1,Built-up,21,"{""type"":""MultiPoint"",""coordinates"":[]}"
-5,184983.91528558888,1849.8391528558889,2,Vegetation,2,Vegetation,22,"{""type"":""MultiPoint"",""coordinates"":[]}"
-6,80.41919337127088,0.8041919337127088,2,Vegetation,3,Water,23,"{""type"":""MultiPoint"",""coordinates"":[]}"
-7,1022.6043238958139,10.22604323895814,2,Vegetation,4,Bare soil,24,"{""type"":""MultiPoint"",""coordinates"":[]}"
-8,126.03182363151998,1.2603182363152,3,Water,1,Built-up,31,"{""type"":""MultiPoint"",""coordinates"":[]}"
-9,842.8677821366376,8.428677821366376,3,Water,2,Vegetation,32,"{""type"":""MultiPoint"",""coordinates"":[]}"
-10,404.70135872594494,4.04701358725945,3,Water,3,Water,33,"{""type"":""MultiPoint"",""coordinates"":[]}"
-11,0.2659314147949219,0.0026593141479492187,3,Water,4,Bare soil,34,"{""type"":""MultiPoint"",""coordinates"":[]}"
-12,288.72460295221083,2.8872460295221085,4,Bare soil,1,Built-up,41,"{""type"":""MultiPoint"",""coordinates"":[]}"
-13,6.853935565041932,0.06853935565041933,4,Bare soil,2,Vegetation,42,"{""type"":""MultiPoint"",""coordinates"":[]}"
-14,1.4191486938476563,0.014191486938476564,4,Bare soil,3,Water,43,"{""type"":""MultiPoint"",""coordinates"":[]}"
-15,64.98121318969726,0.6498121318969725,4,Bare soil,4,Bare soil,44,"{""type"":""MultiPoint"",""coordinates"":[]}"
+from_class,to_class,transition_code,area_km2
+Built-up,Built-up,11,81.9414
+Built-up,Vegetation,12,17.8236
+Built-up,Water,13,0.0360
+Built-up,Bare soil,14,0.0648
+Vegetation,Built-up,21,246.1041
+Vegetation,Vegetation,22,2861.2584
+Vegetation,Water,23,0.6633
+Vegetation,Bare soil,24,4.2075
+Water,Built-up,31,0.0072
+Water,Vegetation,32,1.5570
+Water,Water,33,3.4992
+Water,Bare soil,34,0.0000
+Bare soil,Built-up,41,2.1240
+Bare soil,Vegetation,42,1.2636
+Bare soil,Water,43,0.0009
+Bare soil,Bare soil,44,0.0297
