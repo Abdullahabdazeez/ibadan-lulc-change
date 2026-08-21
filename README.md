@@ -8,7 +8,7 @@ A remote-sensing and GIS assessment of how built-up land, vegetation, water and 
 
 > **Project status: final reconstruction accepted and frozen.**
 >
-> The original workflow was subjected to a later scientific audit after its validation evidence proved insufficient for the headline claims. Those earlier results were withdrawn from use, the classification was rebuilt, deployment errors were repaired through blinded human review, and the final products were frozen only after independent holdout validation and wall-to-wall consistency checks.
+> A later scientific audit showed that the original validation framework did not adequately represent deployment-domain performance. The earlier headline results were withdrawn, the classification was rebuilt, deployment errors were repaired through blinded human review, and the final products were frozen only after independent holdout validation and wall-to-wall consistency checks.
 
 ## Research question
 
@@ -32,27 +32,14 @@ A remote-sensing and GIS assessment of how built-up land, vegetation, water and 
 | Stable landscape | **91.50%** |
 | Changed landscape | **8.50%** |
 
-The dominant mapped conversion was **Vegetation → Built-up**, covering about **246.104 km²**. Almost all gross new built-up land identified in the change analysis had therefore been mapped as vegetation in 2013.
-
-## Final maps
-
-### Land cover in 2013 and 2023
-
 <p align="center">
-  <img src="outputs/maps/01_lulc_2013.png" alt="Ibadan land cover in 2013" width="49%">
-  <img src="outputs/maps/02_lulc_2023.png" alt="Ibadan land cover in 2023" width="49%">
+  <img src="outputs/charts/final_area_comparison.svg" alt="Final LULC area comparison" width="95%">
 </p>
 
-### Built-up expansion, 2013–2023
+The dominant mapped conversion was **Vegetation → Built-up**, covering **246.104 km²**. Almost all gross new built-up land identified in the change analysis had therefore been mapped as vegetation in 2013.
 
 <p align="center">
-  <img src="outputs/maps/03_built_up_gain_2013_2023.png" alt="Built-up expansion in Ibadan from 2013 to 2023" width="85%">
-</p>
-
-### Major land-cover transitions
-
-<p align="center">
-  <img src="outputs/maps/04_major_transitions_2013_2023.png" alt="Major land-cover transitions in Ibadan from 2013 to 2023" width="85%">
+  <img src="outputs/charts/final_change_summary.svg" alt="Final built-up expansion summary" width="95%">
 </p>
 
 ## Data and predictors
@@ -61,11 +48,7 @@ The final classification used Landsat-derived surface-reflectance and spectral-i
 
 Final classes were **Built-up, Vegetation, Water and Bare soil**.
 
-## Workflow
-
-<p align="center">
-  <img src="outputs/charts/00_workflow.png" alt="Ibadan LULC reconstruction workflow" width="90%">
-</p>
+## Final reconstruction workflow
 
 1. Rebuilt comparable 2013 and 2023 Landsat predictor stacks.
 2. Used a Random Forest classifier for four-class LULC mapping.
@@ -76,7 +59,7 @@ Final classes were **Built-up, Vegetation, Water and Bare soil**.
 7. Froze the repaired model before opening the holdout.
 8. Reclassified both years on an identical common analysis footprint.
 9. Ran spectral, temporal and spatial consistency checks.
-10. Froze the final classification before producing maps, transition analysis, figures and public documentation.
+10. Froze the accepted classification before producing change products and publication documentation.
 
 ## Independent validation
 
@@ -90,24 +73,35 @@ The strongest final predictive evidence is the **16-sample locked holdout**, whi
 | Macro F1 | 0.2448 | **0.6354** |
 | Cohen's Kappa | 0.1304 | **0.7935** |
 
-The repair corrected **8** previously incorrect holdout cases and introduced **0 regressions**. Because the locked holdout contains only 16 samples, the raw case count should be interpreted alongside the percentage metrics, and per-class scores with very small support should be treated cautiously.
-
-## Change statistics
+The repair corrected **8** previously incorrect holdout cases and introduced **0 regressions**.
 
 <p align="center">
-  <img src="outputs/charts/01_area_comparison.png" alt="Land-cover area comparison" width="48%">
-  <img src="outputs/charts/02_net_change.png" alt="Land-cover net change" width="48%">
+  <img src="outputs/charts/final_validation.svg" alt="Final locked-holdout validation" width="95%">
 </p>
 
-<p align="center">
-  <img src="outputs/charts/03_transition_matrix.png" alt="Land-cover transition matrix" width="75%">
-</p>
+Because the locked holdout contains only 16 samples, the raw case count should be interpreted alongside the percentage metrics. Per-class scores with very small support should be treated cautiously.
 
-> **Provenance note:** repository history preserves outputs from the superseded original workflow. Public numerical claims must use the final reconstruction values reported in this README and the current tables under `outputs/tables/`. Historical artefacts should not be interpreted as final scientific evidence.
+## Final transition matrix
+
+All values are km².
+
+| 2013 → 2023 | Built-up | Vegetation | Water | Bare soil |
+|---|---:|---:|---:|---:|
+| **Built-up** | 81.9414 | 17.8236 | 0.0360 | 0.0648 |
+| **Vegetation** | **246.1041** | 2861.2584 | 0.6633 | 4.2075 |
+| **Water** | 0.0072 | 1.5570 | 3.4992 | 0.0000 |
+| **Bare soil** | 2.1240 | 1.2636 | 0.0009 | 0.0297 |
+
+The machine-readable version is available at [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv).
 
 ## Scientific evidence hierarchy
 
-The project keeps four evidence types separate: **independent locked-holdout validation** as final predictive evidence; **calibration-only out-of-fold evaluation** as model-development evidence; **spectral consistency diagnostics** as wall-to-wall plausibility checks; and **temporal/spatial consistency checks** as common-footprint and change-pattern sanity checks.
+The project keeps four evidence types separate:
+
+1. **Independent locked-holdout validation** — final predictive evidence.
+2. **Calibration-only out-of-fold evaluation** — model-development evidence.
+3. **Spectral consistency diagnostics** — wall-to-wall plausibility checks.
+4. **Temporal/spatial consistency checks** — common-footprint and change-pattern sanity checks.
 
 Only the locked holdout is treated as final independent classification accuracy. The other diagnostics support scientific plausibility but are not merged into a synthetic accuracy score.
 
@@ -117,24 +111,26 @@ The final reconstruction shows substantial urban expansion accompanied by a near
 
 For planning, the pattern supports closer monitoring of peripheral urban growth, stronger development control, protection of strategically important green areas, and infrastructure planning that anticipates continued outward expansion. The analysis identifies where land-cover conversion occurred; it does not by itself establish the demographic, economic or regulatory causes of that conversion.
 
-## Main project outputs
+## Cartographic products
 
-The completed scientific package includes final 2013 and 2023 LULC rasters and maps, a 2013–2023 comparison, transition analysis, stable-vs-changed and built-up-expansion products, vegetation-to-built-up analysis, class-area tables, statistical figures, independent validation evidence, consistency audits, and final technical documentation.
+The final reconstruction produced publication-quality 2013 and 2023 LULC maps, a comparison map, a major-transition map, a built-up-expansion map and a stable-vs-changed map. Superseded pre-reconstruction PNGs previously stored in this repository have been removed so that no outdated classification is presented as final evidence.
+
+The authoritative final raster and cartographic products are preserved in the frozen Stage-10 scientific package. The repository tables, documentation and SVG figures now report only the final reconstruction values.
 
 ## Repository structure
 
 ```text
 .
-├── assets/                 # Cover and repository graphics
-├── data/                   # Data and processed project inputs
-├── docs/                   # Project documentation
+├── assets/                 # Repository graphics
+├── data/                   # Project inputs / supporting data
+├── docs/                   # Final methods, results and limitations
 ├── notebooks/              # Analysis / review notebooks
 ├── outputs/
-│   ├── maps/               # Portfolio maps
-│   ├── charts/             # Statistical and workflow figures
+│   ├── charts/             # Final repository-safe SVG summaries
+│   ├── maps/               # Cartographic product notes
 │   └── tables/             # Final numerical summaries
-├── scripts/                # Earth Engine and Python workflows
-└── validation/             # Validation and repository checks
+├── scripts/                # Analysis workflows
+└── validation/             # Repository and validation records
 ```
 
 ## Tools
@@ -148,6 +144,16 @@ Google Earth Engine · Python · Rasterio · GeoPandas · Pandas · NumPy · sci
 - The four-class scheme generalises more detailed urban and environmental land-cover types.
 - Spectral and temporal consistency tests do not replace independent reference data.
 - Change detection quantifies mapped conversion but does not establish its socioeconomic causes.
+
+## Documentation
+
+- [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)
+- [`docs/RESULTS.md`](docs/RESULTS.md)
+- [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md)
+- [`outputs/tables/key_findings.csv`](outputs/tables/key_findings.csv)
+- [`outputs/tables/classification_accuracy.csv`](outputs/tables/classification_accuracy.csv)
+- [`outputs/tables/lulc_area_change_summary.csv`](outputs/tables/lulc_area_change_summary.csv)
+- [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv)
 
 ## Author
 
