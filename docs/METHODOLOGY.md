@@ -1,7 +1,34 @@
 # Methodology
 
-The analysis used Landsat 8 Collection 2 Level-2 imagery to produce separate 2013 and 2023 median composites. QA-based cloud, shadow, cirrus, and saturation masks were applied before calculating NDVI, NDBI, MNDWI, BSI, and EVI alongside the six optical bands.
+## Final reconstruction
 
-Dynamic World class probabilities and conservative spectral rules supplied reference candidates for built-up land, vegetation, water, and bare soil. Stratified samples were balanced across the four classes and split into 70% training and 30% validation subsets. Separate Random Forest models were trained for each year using 300 trees, a 0.70 bag fraction, and two-sample minimum leaf population. A one-pixel focal mode filter reduced isolated classification noise.
+The final Ibadan LULC reconstruction compares 2013 and 2023 on an identical **30 m** analysis grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. The authoritative common footprint contains **3,578,423 pixels**, equivalent to **3,220.581 km²**.
 
-Classification performance was assessed with confusion matrices, overall accuracy, Kappa, producer’s accuracy, and consumer’s accuracy. Post-classification comparison generated the 16-class transition raster, area statistics, net-change table, and built-up gain layer. All final rasters use WGS 84 / UTM Zone 31N (EPSG:32631) at 30 m resolution.
+Landsat-derived predictors were rebuilt for both years and included **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6, SR_B7, NDVI, NDBI and MNDWI**. A Random Forest classifier was used to map four classes: Built-up, Vegetation, Water and Bare soil.
+
+## Reconstruction and deployment repair
+
+A later audit found that the earlier validation framework did not adequately represent deployment-domain performance. The original headline results were therefore withdrawn from use and the classification was reconstructed rather than simply republished.
+
+Targeted human-review stages were used to diagnose difficult class boundaries and deployment errors. The final deployment review contained **48 visually reviewed samples**, divided before final evaluation into:
+
+- **32 calibration samples** used for model-development decisions; and
+- **16 locked holdout samples** reserved for independent evaluation.
+
+The locked holdout labels were not used for model fitting, calibration weighting, feature selection, threshold selection or hyperparameter tuning. The final repaired model was frozen before the holdout labels were opened.
+
+## Validation and scientific checks
+
+The primary final predictive evidence is the **16-sample locked holdout**. The final repaired classifier correctly classified **14/16** samples, with Overall Accuracy **0.8750**, Balanced Accuracy **0.9259**, Macro F1 **0.6354** and Cohen's Kappa **0.7935**.
+
+Three additional evidence types were retained separately:
+
+1. calibration-only out-of-fold evaluation used during development;
+2. wall-to-wall spectral consistency diagnostics using NDVI, NDBI and MNDWI; and
+3. temporal/spatial consistency checks, including identical analysis footprints and change-pattern plausibility.
+
+These supporting diagnostics are not combined with the locked holdout into a synthetic accuracy score.
+
+## Change analysis
+
+Post-classification comparison generated a complete **4 × 4 transition matrix**, stable-vs-changed mapping, built-up expansion mapping, vegetation-to-built-up conversion, class-area summaries and net-change statistics. All downstream maps and figures were generated only after the accepted 2013 and 2023 rasters were frozen as authoritative inputs.
