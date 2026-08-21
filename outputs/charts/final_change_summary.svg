@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520">
+  <rect width="960" height="520" fill="white"/>
+  <style>text{font-family:Arial,Helvetica,sans-serif;fill:#222}.title{font-size:28px;font-weight:700}.sub{font-size:15px;fill:#555}.big{font-size:34px;font-weight:700}.lab{font-size:16px}.note{font-size:14px;fill:#555}.box{rx:14;ry:14}</style>
+  <text x="480" y="42" text-anchor="middle" class="title">What drove Ibadan's mapped urban expansion?</text>
+  <text x="480" y="68" text-anchor="middle" class="sub">Final frozen 2013–2023 transition analysis</text>
+  <rect x="70" y="115" width="235" height="145" fill="#f6f6f6" stroke="#bbb" class="box"/>
+  <text x="188" y="155" text-anchor="middle" class="lab">Gross new built-up</text><text x="188" y="205" text-anchor="middle" class="big">248.235 km²</text>
+  <rect x="362" y="115" width="235" height="145" fill="#fff0ef" stroke="#d73027" class="box"/>
+  <text x="480" y="155" text-anchor="middle" class="lab">Vegetation → Built-up</text><text x="480" y="205" text-anchor="middle" class="big" fill="#d73027">246.104 km²</text>
+  <rect x="655" y="115" width="235" height="145" fill="#f2f8f2" stroke="#4daf4a" class="box"/>
+  <text x="772" y="155" text-anchor="middle" class="lab">Share of new built-up</text><text x="772" y="205" text-anchor="middle" class="big" fill="#2e7d32">99.14%</text>
+  <text x="480" y="322" text-anchor="middle" class="lab">Net built-up change</text>
+  <rect x="160" y="350" width="640" height="42" rx="21" fill="#eee"/>
+  <rect x="160" y="350" width="640" height="42" rx="21" fill="#d73027"/>
+  <text x="480" y="379" text-anchor="middle" font-size="20" font-weight="700" fill="white">+230.311 km²  ·  +230.62% relative to 2013</text>
+  <text x="480" y="438" text-anchor="middle" class="note">91.50% of the wider landscape remained in the same class; 8.50% changed.</text>
+  <text x="480" y="465" text-anchor="middle" class="note">The dominant actual transition was Vegetation → Built-up.</text>
+</svg>
