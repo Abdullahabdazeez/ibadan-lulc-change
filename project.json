@@ -1,7 +1,25 @@
 {
-  "project_title": "Land-Use and Land-Cover Change in Ibadan Metropolitan Area (2013\u20132023)",
+  "project_title": "Land-Use and Land-Cover Change in Ibadan Metropolitan Area (2013–2023)",
   "repository_name": "ibadan-lulc-change",
-  "description": "Remote-sensing analysis of land-use and land-cover change in Ibadan Metropolitan Area using Landsat and Random Forest classification (2013\u20132023).",
+  "description": "Validated remote-sensing assessment of 2013–2023 land-cover change and vegetation-to-built-up conversion across Ibadan using Landsat and Random Forest classification.",
+  "status": "final-reconstruction-accepted-and-frozen",
+  "key_findings": {
+    "analysis_area_km2": 3220.581,
+    "builtup_2013_km2": 99.866,
+    "builtup_2023_km2": 330.177,
+    "net_builtup_change_km2": 230.311,
+    "relative_builtup_change_percent": 230.62,
+    "vegetation_to_builtup_km2": 246.104,
+    "vegetation_share_of_gross_new_builtup_percent": 99.14
+  },
+  "independent_validation": {
+    "holdout_n": 16,
+    "correct": 14,
+    "overall_accuracy": 0.8750,
+    "balanced_accuracy": 0.9259,
+    "macro_f1": 0.6354,
+    "kappa": 0.7935
+  },
   "topics": [
     "gis",
     "remote-sensing",
