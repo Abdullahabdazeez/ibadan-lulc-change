@@ -1,3 +1,2 @@
-year,overall_accuracy_pct,kappa
-2013,92.34,0.895
-2023,97.04,0.961
+evaluation_set,n,correct,overall_accuracy_pct,balanced_accuracy_pct,macro_f1,kappa
+Locked independent holdout,16,14,87.50,92.59,0.6354,0.7935
