@@ -4,86 +4,162 @@
 
 # Ibadan Land-Cover Change, 2013–2023
 
-> **Audit status — reconstruction in progress**
+A remote-sensing and GIS assessment of how built-up land, vegetation, water and bare soil changed across the Ibadan study area between 2013 and 2023, with particular attention to the source and scale of urban expansion.
+
+> **Project status: final reconstruction accepted and frozen.**
 >
-> The results currently stored in this repository came from the original workflow and are retained for transparency. A later forensic review could not recover adequate independent reference samples, confusion matrices or acquisition-date evidence for the published accuracy and change claims. Those figures are therefore **superseded and should not be cited as validated results**.
+> The original workflow was subjected to a later scientific audit after its validation evidence proved insufficient for the headline claims. Those earlier results were withdrawn from use, the classification was rebuilt, deployment errors were repaired through blinded human review, and the final products were frozen only after independent holdout validation and wall-to-wall consistency checks.
 
-## Why the project is being reconstructed
+## Research question
 
-The original study classified built-up land, vegetation, water and bare soil from Landsat imagery and compared the 2013 and 2023 maps. During a 2026 scientific audit, I found that the repository did not contain enough evidence to independently verify:
+**How did the spatial distribution of built-up land, vegetation, water and bare soil change across Ibadan between 2013 and 2023, and which land-cover class contributed most to new urban development?**
 
-- the reported 2013 and 2023 accuracy figures;
-- the independence of the original calibration and validation samples;
-- seasonal comparability between the two observation years; and
-- the headline land-cover change estimates.
+## Key findings
 
-I therefore started a full reconstruction instead of continuing to present the earlier results as final.
-
-## Reconstruction completed so far
-
-The revised workflow now includes:
-
-- seasonally matched April–June Landsat composites for both years;
-- six surface-reflectance bands and NDVI, NDBI and MNDWI predictors;
-- a human-reviewed reference set;
-- nested, stratified out-of-fold validation;
-- explicit checks for overlap between model-development and validation records; and
-- a strict common spatial mask for year-to-year comparison.
-
-The current leakage-free model was evaluated on 182 human-reference records and produced:
-
-| Metric | Current reconstruction result |
+| Indicator | Final result |
 |---|---:|
-| Overall accuracy | 78.57% |
-| Balanced accuracy | 71.46% |
-| Macro F1 | 72.51% |
-| Kappa | 0.639 |
-| Built-up precision | 69.23% |
-| Built-up recall | 52.94% |
+| Analysis area | **3,220.581 km²** |
+| Built-up area, 2013 | **99.866 km² (3.101%)** |
+| Built-up area, 2023 | **330.177 km² (10.252%)** |
+| Net built-up increase | **230.311 km²** |
+| Relative built-up increase | **230.62%** |
+| Vegetation area, 2013 | **3,112.233 km² (96.636%)** |
+| Vegetation area, 2023 | **2,881.903 km² (89.484%)** |
+| Vegetation net change | **−230.331 km²** |
+| Gross new built-up land | **248.235 km²** |
+| Vegetation → Built-up | **246.104 km²** |
+| Share of gross new built-up from vegetation | **99.14%** |
+| Stable landscape | **91.50%** |
+| Changed landscape | **8.50%** |
 
-These results are more modest than the original figures but are supported by a stronger validation design.
+The dominant mapped conversion was **Vegetation → Built-up**, covering about **246.104 km²**. This means almost all gross new built-up land identified in the change analysis had been mapped as vegetation in 2013.
 
-## Current limitation
+## Data and predictors
 
-The first common-mask reconstruction still showed an implausible class pattern, especially unusually extensive water and very limited bare soil. Its audit therefore ended with **CLASS_PATTERN_REVIEW_REQUIRED**.
+The final classification used Landsat-derived surface-reflectance and spectral-index predictors:
 
-A targeted human-review and deployment-repair stage began but has not yet been completed. For that reason:
+- SR_B2
+- SR_B3
+- SR_B4
+- SR_B5
+- SR_B6
+- SR_B7
+- NDVI
+- NDBI
+- MNDWI
 
-- no revised land-cover area table is presented as final;
-- no revised change statistic is promoted as authoritative;
-- the old maps and tables remain historical repository material; and
-- the project should currently be described as **under reconstruction**, not completed.
+Both years were aligned to a common **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**.
 
-## Repository contents
+Final classes:
 
-The existing folders preserve the original workflow, outputs and supporting files:
+1. Built-up
+2. Vegetation
+3. Water
+4. Bare soil
+
+## Workflow
+
+1. Rebuilt comparable 2013 and 2023 Landsat predictor stacks.
+2. Used a Random Forest classifier for four-class LULC mapping.
+3. Audited the initial reconstruction for leakage, domain shift and implausible class patterns.
+4. Conducted targeted blinded human review of deployment-domain samples.
+5. Split the final deployment review into **32 calibration samples** and **16 locked holdout samples**.
+6. Selected the deployment repair without using locked-holdout labels.
+7. Froze the repaired model before opening the holdout.
+8. Reclassified both years on an identical common analysis footprint.
+9. Ran spectral, temporal and spatial consistency checks.
+10. Froze the final classification before producing maps, transition analysis, figures and public documentation.
+
+## Independent validation
+
+The strongest final predictive evidence is the **16-sample locked holdout**, which was excluded from model fitting and calibration selection.
+
+| Metric | Baseline A6F | Final repaired model |
+|---|---:|---:|
+| Correct cases | 6/16 | **14/16** |
+| Overall Accuracy | 0.3750 | **0.8750** |
+| Balanced Accuracy | 0.2593 | **0.9259** |
+| Macro F1 | 0.2448 | **0.6354** |
+| Cohen's Kappa | 0.1304 | **0.7935** |
+
+The repair corrected **8** previously incorrect holdout cases and introduced **0 regressions**.
+
+Because the locked holdout contains only 16 samples, the raw case count should be interpreted alongside the percentage metrics. Per-class scores with very small support should also be treated cautiously.
+
+## Scientific evidence hierarchy
+
+The project keeps four evidence types separate:
+
+1. **Independent locked-holdout validation** — final predictive evidence.
+2. **Calibration-only out-of-fold evaluation** — development evidence used during repair selection.
+3. **Spectral consistency diagnostics** — wall-to-wall plausibility checks using NDVI, NDBI and MNDWI.
+4. **Temporal and spatial consistency checks** — common-footprint and change-pattern sanity checks.
+
+Only the locked holdout is treated as final independent classification accuracy. The other diagnostics support scientific plausibility but are not merged into a synthetic accuracy score.
+
+## Planning interpretation
+
+The final reconstruction shows substantial urban expansion accompanied by a nearly equal decline in vegetation. The transition matrix indicates that this was overwhelmingly associated with conversion of vegetated land to built-up surfaces.
+
+For planning, the pattern supports closer monitoring of peripheral urban growth, stronger development control, protection of strategically important green areas, and infrastructure planning that anticipates continued outward expansion. The analysis identifies where land-cover conversion occurred; it does not by itself establish the demographic, economic or regulatory causes of that conversion.
+
+## Main project outputs
+
+The completed scientific package includes:
+
+- final 2013 and 2023 LULC rasters;
+- publication-quality 2013 and 2023 maps;
+- a 2013–2023 comparison map;
+- a full 4 × 4 transition matrix;
+- stable-vs-changed mapping;
+- built-up expansion mapping;
+- vegetation-to-built-up conversion mapping;
+- class-area and net-change tables;
+- eight statistical figures;
+- independent validation evidence;
+- spectral and temporal consistency audits; and
+- final technical and portfolio documentation.
+
+## Repository structure
 
 ```text
 .
-├── assets/                 # Cover and preview graphics
-├── data/processed/         # Superseded original rasters and tables
-├── docs/                   # Original project documentation
-├── notebooks/              # Results-review notebook
-├── outputs/                # Superseded original maps, charts and summaries
-├── scripts/                # Original Earth Engine and Python scripts
-└── validation/             # Repository-level file checks
+├── assets/                 # Cover and repository graphics
+├── data/                   # Data and processed project inputs
+├── docs/                   # Project documentation
+├── notebooks/              # Analysis / review notebooks
+├── outputs/                # Maps, charts and result products
+├── scripts/                # Earth Engine and Python workflows
+└── validation/             # Validation and repository checks
 ```
 
-Repository validation confirms that files are present and readable; it does not establish scientific accuracy.
+The historical files are retained as provenance. Final published claims should use the frozen reconstruction results reported in this README rather than superseded original statistics.
 
-## Next steps
+## Tools
 
-1. Complete the remaining blinded human review.
-2. Repair the built-up/vegetation deployment boundary.
-3. Reclassify both years with the accepted model.
-4. Inspect class patterns and spatial plausibility.
-5. Recalculate change on the strict common mask.
-6. Replace the superseded repository outputs only after the final validation gate passes.
+- Google Earth Engine
+- Python
+- Rasterio
+- GeoPandas
+- Pandas
+- NumPy
+- scikit-learn
+- Matplotlib
+- Google Colab
+- Git / GitHub
+
+## Limitations
+
+- The final independent holdout contains 16 samples.
+- Landsat's 30 m resolution can produce mixed pixels in heterogeneous urban areas.
+- The four-class scheme generalises more detailed urban and environmental land-cover types.
+- Spectral and temporal consistency tests do not replace independent reference data.
+- Change detection quantifies mapped conversion but does not establish its socioeconomic causes.
 
 ## Author
 
 **Abdullah Abdazeez Ayomide**  
-Geo-spatial Planner | GIS & Remote Sensing Analyst
+Geo-spatial Planner | GIS & Remote Sensing Analyst | Urban & Environmental Planning Researcher
 
 - [GitHub](https://github.com/Abdullahabdazeez)
 - [LinkedIn](https://ng.linkedin.com/in/abdazeez-abdullah-4b814719a)
@@ -91,4 +167,4 @@ Geo-spatial Planner | GIS & Remote Sensing Analyst
 
 ## Citation and licence
 
-The code and original documentation remain available under the MIT License. The numerical results currently stored in the repository should not be cited as validated findings while reconstruction is in progress.
+Code is available under the MIT License. When citing results, use the **final reconstructed and frozen 2013–2023 outputs** rather than superseded statistics from the original workflow.
