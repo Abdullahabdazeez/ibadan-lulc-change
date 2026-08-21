@@ -1,9 +1,22 @@
 indicator,value,unit
-Mapped area (2013),3206.2604147348907,km²
-Mapped area (2023),3206.2737180383897,km²
-Built-up net increase,679.6411950121696,km²
-Built-up relative increase,112.36494487433264,%
-Vegetation net decrease,-689.2090956193642,km²
-Vegetation-to-built-up transition,723.1809437348224,km²
-2013 overall accuracy,92.34,%
-2023 overall accuracy,97.04,%
+Common analysis area,3220.581,km²
+Built-up area (2013),99.866,km²
+Built-up share (2013),3.101,%
+Built-up area (2023),330.177,km²
+Built-up share (2023),10.252,%
+Built-up net increase,230.311,km²
+Built-up relative increase,230.62,%
+Vegetation area (2013),3112.233,km²
+Vegetation share (2013),96.636,%
+Vegetation area (2023),2881.903,km²
+Vegetation share (2023),89.484,%
+Vegetation net change,-230.331,km²
+Gross new built-up land,248.235,km²
+Vegetation-to-built-up transition,246.104,km²
+Vegetation share of gross new built-up,99.14,%
+Stable landscape,91.50,%
+Changed landscape,8.50,%
+Locked holdout overall accuracy,87.50,%
+Locked holdout balanced accuracy,92.59,%
+Locked holdout macro F1,0.6354,score
+Locked holdout Kappa,0.7935,score
