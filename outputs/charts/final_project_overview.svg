@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+<title id="title">Ibadan LULC 2013–2023 final project overview</title>
+<desc id="desc">Summary of final built-up growth, vegetation conversion and independent validation results.</desc>
+<rect width="1200" height="520" fill="#ffffff"/>
+<text x="60" y="70" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#111827">Ibadan LULC Change, 2013–2023</text>
+<text x="60" y="108" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#4b5563">Final reconstructed and validated results</text>
+
+<rect x="60" y="150" width="330" height="140" rx="20" fill="#f3f4f6" stroke="#d1d5db"/>
+<text x="90" y="190" font-family="Arial" font-size="18" font-weight="700" fill="#374151">Built-up area</text>
+<text x="90" y="235" font-family="Arial" font-size="28" font-weight="700" fill="#111827">99.866 → 330.177 km²</text>
+<text x="90" y="270" font-family="Arial" font-size="18" fill="#4b5563">Net increase: +230.311 km²</text>
+
+<rect x="435" y="150" width="330" height="140" rx="20" fill="#f3f4f6" stroke="#d1d5db"/>
+<text x="465" y="190" font-family="Arial" font-size="18" font-weight="700" fill="#374151">Urban expansion source</text>
+<text x="465" y="235" font-family="Arial" font-size="28" font-weight="700" fill="#111827">246.104 km²</text>
+<text x="465" y="270" font-family="Arial" font-size="18" fill="#4b5563">Vegetation → Built-up (99.14%)</text>
+
+<rect x="810" y="150" width="330" height="140" rx="20" fill="#f3f4f6" stroke="#d1d5db"/>
+<text x="840" y="190" font-family="Arial" font-size="18" font-weight="700" fill="#374151">Independent validation</text>
+<text x="840" y="235" font-family="Arial" font-size="28" font-weight="700" fill="#111827">14 / 16 correct</text>
+<text x="840" y="270" font-family="Arial" font-size="18" fill="#4b5563">OA 87.50% · Kappa 0.794</text>
+
+<text x="60" y="355" font-family="Arial" font-size="18" font-weight="700" fill="#374151">Built-up share of study area</text>
+<rect x="60" y="380" width="1080" height="26" rx="13" fill="#e5e7eb"/>
+<rect x="60" y="380" width="335" height="26" rx="13" fill="#6b7280"/>
+<rect x="60" y="430" width="1080" height="26" rx="13" fill="#e5e7eb"/>
+<rect x="60" y="430" width="1107" height="26" rx="13" fill="#111827" transform="scale(.316,1) translate(130,0)"/>
+<text x="60" y="474" font-family="Arial" font-size="16" fill="#4b5563">2013: 3.101%                                  2023: 10.252%</text>
+<text x="930" y="495" font-family="Arial" font-size="14" fill="#6b7280">Analysis area: 3,220.581 km²</text>
+</svg>
