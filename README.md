@@ -14,7 +14,7 @@ A remote-sensing and GIS assessment of how built-up land, vegetation, water and 
 
 **How did the spatial distribution of built-up land, vegetation, water and bare soil change across Ibadan between 2013 and 2023, and which land-cover class contributed most to new urban development?**
 
-## Key findings
+## Results at a glance
 
 | Indicator | Final result |
 |---|---:|
@@ -32,32 +32,40 @@ A remote-sensing and GIS assessment of how built-up land, vegetation, water and 
 | Stable landscape | **91.50%** |
 | Changed landscape | **8.50%** |
 
-The dominant mapped conversion was **Vegetation → Built-up**, covering about **246.104 km²**. This means almost all gross new built-up land identified in the change analysis had been mapped as vegetation in 2013.
+The dominant mapped conversion was **Vegetation → Built-up**, covering about **246.104 km²**. Almost all gross new built-up land identified in the change analysis had therefore been mapped as vegetation in 2013.
+
+## Final maps
+
+### Land cover in 2013 and 2023
+
+<p align="center">
+  <img src="outputs/maps/01_lulc_2013.png" alt="Ibadan land cover in 2013" width="49%">
+  <img src="outputs/maps/02_lulc_2023.png" alt="Ibadan land cover in 2023" width="49%">
+</p>
+
+### Built-up expansion, 2013–2023
+
+<p align="center">
+  <img src="outputs/maps/03_built_up_gain_2013_2023.png" alt="Built-up expansion in Ibadan from 2013 to 2023" width="85%">
+</p>
+
+### Major land-cover transitions
+
+<p align="center">
+  <img src="outputs/maps/04_major_transitions_2013_2023.png" alt="Major land-cover transitions in Ibadan from 2013 to 2023" width="85%">
+</p>
 
 ## Data and predictors
 
-The final classification used Landsat-derived surface-reflectance and spectral-index predictors:
+The final classification used Landsat-derived surface-reflectance and spectral-index predictors: **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6, SR_B7, NDVI, NDBI and MNDWI**. Both years were aligned to a common **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**.
 
-- SR_B2
-- SR_B3
-- SR_B4
-- SR_B5
-- SR_B6
-- SR_B7
-- NDVI
-- NDBI
-- MNDWI
-
-Both years were aligned to a common **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**.
-
-Final classes:
-
-1. Built-up
-2. Vegetation
-3. Water
-4. Bare soil
+Final classes were **Built-up, Vegetation, Water and Bare soil**.
 
 ## Workflow
+
+<p align="center">
+  <img src="outputs/charts/00_workflow.png" alt="Ibadan LULC reconstruction workflow" width="90%">
+</p>
 
 1. Rebuilt comparable 2013 and 2023 Landsat predictor stacks.
 2. Used a Random Forest classifier for four-class LULC mapping.
@@ -82,43 +90,36 @@ The strongest final predictive evidence is the **16-sample locked holdout**, whi
 | Macro F1 | 0.2448 | **0.6354** |
 | Cohen's Kappa | 0.1304 | **0.7935** |
 
-The repair corrected **8** previously incorrect holdout cases and introduced **0 regressions**.
+The repair corrected **8** previously incorrect holdout cases and introduced **0 regressions**. Because the locked holdout contains only 16 samples, the raw case count should be interpreted alongside the percentage metrics, and per-class scores with very small support should be treated cautiously.
 
-Because the locked holdout contains only 16 samples, the raw case count should be interpreted alongside the percentage metrics. Per-class scores with very small support should also be treated cautiously.
+## Change statistics
+
+<p align="center">
+  <img src="outputs/charts/01_area_comparison.png" alt="Land-cover area comparison" width="48%">
+  <img src="outputs/charts/02_net_change.png" alt="Land-cover net change" width="48%">
+</p>
+
+<p align="center">
+  <img src="outputs/charts/03_transition_matrix.png" alt="Land-cover transition matrix" width="75%">
+</p>
+
+> **Provenance note:** repository history preserves outputs from the superseded original workflow. Public numerical claims must use the final reconstruction values reported in this README and the current tables under `outputs/tables/`. Historical artefacts should not be interpreted as final scientific evidence.
 
 ## Scientific evidence hierarchy
 
-The project keeps four evidence types separate:
-
-1. **Independent locked-holdout validation** — final predictive evidence.
-2. **Calibration-only out-of-fold evaluation** — development evidence used during repair selection.
-3. **Spectral consistency diagnostics** — wall-to-wall plausibility checks using NDVI, NDBI and MNDWI.
-4. **Temporal and spatial consistency checks** — common-footprint and change-pattern sanity checks.
+The project keeps four evidence types separate: **independent locked-holdout validation** as final predictive evidence; **calibration-only out-of-fold evaluation** as model-development evidence; **spectral consistency diagnostics** as wall-to-wall plausibility checks; and **temporal/spatial consistency checks** as common-footprint and change-pattern sanity checks.
 
 Only the locked holdout is treated as final independent classification accuracy. The other diagnostics support scientific plausibility but are not merged into a synthetic accuracy score.
 
 ## Planning interpretation
 
-The final reconstruction shows substantial urban expansion accompanied by a nearly equal decline in vegetation. The transition matrix indicates that this was overwhelmingly associated with conversion of vegetated land to built-up surfaces.
+The final reconstruction shows substantial urban expansion accompanied by a nearly equal decline in vegetation. The transition analysis indicates that expansion was overwhelmingly associated with conversion of vegetated land to built-up surfaces.
 
 For planning, the pattern supports closer monitoring of peripheral urban growth, stronger development control, protection of strategically important green areas, and infrastructure planning that anticipates continued outward expansion. The analysis identifies where land-cover conversion occurred; it does not by itself establish the demographic, economic or regulatory causes of that conversion.
 
 ## Main project outputs
 
-The completed scientific package includes:
-
-- final 2013 and 2023 LULC rasters;
-- publication-quality 2013 and 2023 maps;
-- a 2013–2023 comparison map;
-- a full 4 × 4 transition matrix;
-- stable-vs-changed mapping;
-- built-up expansion mapping;
-- vegetation-to-built-up conversion mapping;
-- class-area and net-change tables;
-- eight statistical figures;
-- independent validation evidence;
-- spectral and temporal consistency audits; and
-- final technical and portfolio documentation.
+The completed scientific package includes final 2013 and 2023 LULC rasters and maps, a 2013–2023 comparison, transition analysis, stable-vs-changed and built-up-expansion products, vegetation-to-built-up analysis, class-area tables, statistical figures, independent validation evidence, consistency audits, and final technical documentation.
 
 ## Repository structure
 
@@ -128,25 +129,17 @@ The completed scientific package includes:
 ├── data/                   # Data and processed project inputs
 ├── docs/                   # Project documentation
 ├── notebooks/              # Analysis / review notebooks
-├── outputs/                # Maps, charts and result products
+├── outputs/
+│   ├── maps/               # Portfolio maps
+│   ├── charts/             # Statistical and workflow figures
+│   └── tables/             # Final numerical summaries
 ├── scripts/                # Earth Engine and Python workflows
 └── validation/             # Validation and repository checks
 ```
 
-The historical files are retained as provenance. Final published claims should use the frozen reconstruction results reported in this README rather than superseded original statistics.
-
 ## Tools
 
-- Google Earth Engine
-- Python
-- Rasterio
-- GeoPandas
-- Pandas
-- NumPy
-- scikit-learn
-- Matplotlib
-- Google Colab
-- Git / GitHub
+Google Earth Engine · Python · Rasterio · GeoPandas · Pandas · NumPy · scikit-learn · Matplotlib · Google Colab · Git · GitHub
 
 ## Limitations
 
