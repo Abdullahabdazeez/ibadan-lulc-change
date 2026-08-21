@@ -2,9 +2,7 @@
 
 A remote-sensing and GIS assessment of how built-up land, vegetation, water and bare soil changed across the Ibadan study area between 2013 and 2023, with particular attention to the source and scale of urban expansion.
 
-> **Project status: final reconstruction accepted and frozen.**
->
-> A later scientific audit showed that the original validation framework did not adequately represent deployment-domain performance. The earlier headline results were withdrawn, the classification was rebuilt, deployment errors were repaired through blinded human review, and the final products were frozen only after independent holdout validation and wall-to-wall consistency checks.
+
 
 ## Research question
 
