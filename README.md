@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/project-cover.png" alt="Ibadan land-cover change project" width="100%">
-</p>
-
 # Ibadan Land-Cover Change, 2013–2023
 
 A remote-sensing and GIS assessment of how built-up land, vegetation, water and bare soil changed across the Ibadan study area between 2013 and 2023, with particular attention to the source and scale of urban expansion.
@@ -121,7 +117,6 @@ The authoritative final raster and cartographic products are preserved in the fr
 
 ```text
 .
-├── assets/                 # Repository graphics
 ├── data/                   # Project inputs / supporting data
 ├── docs/                   # Final methods, results and limitations
 ├── notebooks/              # Analysis / review notebooks
