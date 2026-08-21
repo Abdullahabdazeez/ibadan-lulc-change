@@ -1,8 +1,24 @@
 # Ibadan Land-Cover Change, 2013–2023
 
+<p align="center">
+  <img src="outputs/charts/final_project_overview.svg" alt="Ibadan LULC 2013–2023 final project overview" width="100%">
+</p>
+
 A remote-sensing and GIS assessment of how built-up land, vegetation, water and bare soil changed across the Ibadan study area between 2013 and 2023, with particular attention to the source and scale of urban expansion.
 
+## Visual highlights
 
+<p align="center">
+  <img src="outputs/charts/final_area_comparison.svg" alt="Final LULC area comparison for 2013 and 2023" width="95%">
+</p>
+
+<p align="center">
+  <img src="outputs/charts/final_change_summary.svg" alt="Final built-up expansion and vegetation conversion summary" width="95%">
+</p>
+
+<p align="center">
+  <img src="outputs/charts/final_validation.svg" alt="Final locked-holdout validation summary" width="95%">
+</p>
 
 ## Research question
 
@@ -26,15 +42,7 @@ A remote-sensing and GIS assessment of how built-up land, vegetation, water and 
 | Stable landscape | **91.50%** |
 | Changed landscape | **8.50%** |
 
-<p align="center">
-  <img src="outputs/charts/final_area_comparison.svg" alt="Final LULC area comparison" width="95%">
-</p>
-
 The dominant mapped conversion was **Vegetation → Built-up**, covering **246.104 km²**. Almost all gross new built-up land identified in the change analysis had therefore been mapped as vegetation in 2013.
-
-<p align="center">
-  <img src="outputs/charts/final_change_summary.svg" alt="Final built-up expansion summary" width="95%">
-</p>
 
 ## Data and predictors
 
@@ -68,10 +76,6 @@ The strongest final predictive evidence is the **16-sample locked holdout**, whi
 | Cohen's Kappa | 0.1304 | **0.7935** |
 
 The repair corrected **8** previously incorrect holdout cases and introduced **0 regressions**.
-
-<p align="center">
-  <img src="outputs/charts/final_validation.svg" alt="Final locked-holdout validation" width="95%">
-</p>
 
 Because the locked holdout contains only 16 samples, the raw case count should be interpreted alongside the percentage metrics. Per-class scores with very small support should be treated cautiously.
 
@@ -109,7 +113,7 @@ For planning, the pattern supports closer monitoring of peripheral urban growth,
 
 The final reconstruction produced publication-quality 2013 and 2023 LULC maps, a comparison map, a major-transition map, a built-up-expansion map and a stable-vs-changed map. Superseded pre-reconstruction PNGs previously stored in this repository have been removed so that no outdated classification is presented as final evidence.
 
-The authoritative final raster and cartographic products are preserved in the frozen Stage-10 scientific package. The repository tables, documentation and SVG figures now report only the final reconstruction values.
+The authoritative final raster and cartographic products are preserved in the frozen Stage-10 scientific package. The repository tables, documentation and SVG figures report only the final reconstruction values.
 
 ## Repository structure
 
