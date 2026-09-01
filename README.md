@@ -1,57 +1,44 @@
-# Ibadan Land-Cover Change, 2013–2023
+# Ibadan Land-Cover Change and Urban Expansion, 2013–2023
 
+<p align="center">
+  <img src="outputs/maps/final_lulc_comparison.svg" alt="Ibadan land-cover comparison for 2013 and 2023" width="100%">
+</p>
 
-A remote-sensing and GIS assessment of how built-up land, vegetation, water and bare soil changed across the Ibadan study area between 2013 and 2023, with particular attention to the source and scale of urban expansion.
+## What this project asks
 
+How did Ibadan's land cover change over ten years, and what type of land was most often converted as the city expanded?
 
-## Research question
+I used Landsat imagery to map four broad classes — **Built-up, Vegetation, Water and Bare soil** — for 2013 and 2023. The final workflow was rebuilt after an audit of the earlier classification showed that the validation evidence needed to be stronger.
 
-**How did the spatial distribution of built-up land, vegetation, water and bare soil change across Ibadan between 2013 and 2023, and which land-cover class contributed most to new urban development?**
+The important result is straightforward: **Ibadan expanded substantially, and most of the new built-up land had been mapped as vegetation in 2013.**
 
-## Results at a glance
+## Main findings
 
-| Indicator | Final result |
+| Indicator | Result |
 |---|---:|
 | Analysis area | **3,220.581 km²** |
 | Built-up area, 2013 | **99.866 km² (3.101%)** |
 | Built-up area, 2023 | **330.177 km² (10.252%)** |
 | Net built-up increase | **230.311 km²** |
 | Relative built-up increase | **230.62%** |
-| Vegetation area, 2013 | **3,112.233 km² (96.636%)** |
-| Vegetation area, 2023 | **2,881.903 km² (89.484%)** |
-| Vegetation net change | **−230.331 km²** |
 | Gross new built-up land | **248.235 km²** |
 | Vegetation → Built-up | **246.104 km²** |
 | Share of gross new built-up from vegetation | **99.14%** |
-| Stable landscape | **91.50%** |
 | Changed landscape | **8.50%** |
 
-The dominant mapped conversion was **Vegetation → Built-up**, covering **246.104 km²**. Almost all gross new built-up land identified in the change analysis had therefore been mapped as vegetation in 2013.
+The dominant transition was **Vegetation → Built-up**, covering **246.104 km²**. That does not by itself explain *why* the conversion happened, but it clearly shows where the physical growth of the city was concentrated in the mapped landscape.
 
-## Data and predictors
+## Why I rebuilt the analysis
 
-The final classification used Landsat-derived surface-reflectance and spectral-index predictors: **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6, SR_B7, NDVI, NDBI and MNDWI**. Both years were aligned to a common **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**.
+The first version of this project produced attractive results, but a later audit raised questions about the strength of the validation evidence. Rather than keep those results, I rebuilt the classification and validation workflow.
 
-Final classes were **Built-up, Vegetation, Water and Bare soil**.
-
-## Final reconstruction workflow
-
-1. Rebuilt comparable 2013 and 2023 Landsat predictor stacks.
-2. Used a Random Forest classifier for four-class LULC mapping.
-3. Audited the initial reconstruction for leakage, domain shift and implausible class patterns.
-4. Conducted targeted blinded human review of deployment-domain samples.
-5. Split the final deployment review into **32 calibration samples** and **16 locked holdout samples**.
-6. Selected the deployment repair without using locked-holdout labels.
-7. Froze the repaired model before opening the holdout.
-8. Reclassified both years on an identical common analysis footprint.
-9. Ran spectral, temporal and spatial consistency checks.
-10. Froze the accepted classification before producing change products and publication documentation.
+The final version uses seasonally matched Landsat predictors, blinded human review, leakage controls, a locked holdout and wall-to-wall consistency checks. The model was frozen before the holdout was opened.
 
 ## Independent validation
 
-The strongest final predictive evidence is the **16-sample locked holdout**, which was excluded from model fitting and calibration selection.
+The strongest final test is a **16-sample locked holdout** that was not used for fitting or calibration selection.
 
-| Metric | Baseline A6F | Final repaired model |
+| Metric | Earlier baseline | Final model |
 |---|---:|---:|
 | Correct cases | 6/16 | **14/16** |
 | Overall Accuracy | 0.3750 | **0.8750** |
@@ -59,13 +46,30 @@ The strongest final predictive evidence is the **16-sample locked holdout**, whi
 | Macro F1 | 0.2448 | **0.6354** |
 | Cohen's Kappa | 0.1304 | **0.7935** |
 
-The repair corrected **8** previously incorrect holdout cases and introduced **0 regressions**.
+The repaired model corrected **8** previously wrong holdout cases and introduced **0 regressions**.
 
-Because the locked holdout contains only 16 samples, the raw case count should be interpreted alongside the percentage metrics. Per-class scores with very small support should be treated cautiously.
+The holdout is small, so I do not treat the percentage scores as more precise than they really are. The raw case count is just as important here.
 
-## Final transition matrix
+## Data and model
 
-All values are km².
+The final classification uses Landsat surface-reflectance bands **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6 and SR_B7**, together with **NDVI, NDBI and MNDWI**. Both years were aligned to the same **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**.
+
+A Random Forest classifier was used for the four land-cover classes.
+
+## How the final workflow was built
+
+1. Rebuilt comparable 2013 and 2023 Landsat predictor stacks.
+2. Reconstructed the reference data and reviewed difficult cases blindly.
+3. Separated calibration samples from a locked independent holdout.
+4. Selected the repair without looking at holdout labels.
+5. Froze the model and then opened the holdout.
+6. Reclassified both years on one common analysis footprint.
+7. Checked spectral, temporal and spatial consistency.
+8. Produced the final change maps and transition tables only after the classification was accepted.
+
+## Land-cover transitions
+
+All values below are in km².
 
 | 2013 → 2023 | Built-up | Vegetation | Water | Bare soil |
 |---|---:|---:|---:|---:|
@@ -74,59 +78,17 @@ All values are km².
 | **Water** | 0.0072 | 1.5570 | 3.4992 | 0.0000 |
 | **Bare soil** | 2.1240 | 1.2636 | 0.0009 | 0.0297 |
 
-The machine-readable version is available at [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv).
+The machine-readable table is available at [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv).
 
-## Scientific evidence hierarchy
+## What the result means for planning
 
-The project keeps four evidence types separate:
+The pattern points to rapid outward growth and a large loss of land previously mapped as vegetation. For planners, that strengthens the case for monitoring peri-urban expansion, protecting important green areas, coordinating infrastructure with new development and paying closer attention to the cumulative effect of small land conversions at the urban edge.
 
-1. **Independent locked-holdout validation** — final predictive evidence.
-2. **Calibration-only out-of-fold evaluation** — model-development evidence.
-3. **Spectral consistency diagnostics** — wall-to-wall plausibility checks.
-4. **Temporal/spatial consistency checks** — common-footprint and change-pattern sanity checks.
+This project measures mapped land-cover change. It does not claim that the imagery alone can identify the demographic, economic or regulatory causes behind that change.
 
-Only the locked holdout is treated as final independent classification accuracy. The other diagnostics support scientific plausibility but are not merged into a synthetic accuracy score.
+## Outputs and documentation
 
-## Planning interpretation
-
-The final reconstruction shows substantial urban expansion accompanied by a nearly equal decline in vegetation. The transition analysis indicates that expansion was overwhelmingly associated with conversion of vegetated land to built-up surfaces.
-
-For planning, the pattern supports closer monitoring of peripheral urban growth, stronger development control, protection of strategically important green areas, and infrastructure planning that anticipates continued outward expansion. The analysis identifies where land-cover conversion occurred; it does not by itself establish the demographic, economic or regulatory causes of that conversion.
-
-## Cartographic products
-
-The final reconstruction produced publication-quality 2013 and 2023 LULC maps, a comparison map, a major-transition map, a built-up-expansion map and a stable-vs-changed map. Superseded pre-reconstruction PNGs previously stored in this repository have been removed so that no outdated classification is presented as final evidence.
-
-The README now surfaces the principal final maps directly so a reviewer can understand the spatial results before reading the technical documentation. Full-resolution final raster and cartographic products remain preserved in the frozen Stage-10 scientific package.
-
-## Repository structure
-
-```text
-.
-├── data/                   # Project inputs / supporting data
-├── docs/                   # Final methods, results and limitations
-├── notebooks/              # Analysis / review notebooks
-├── outputs/
-│   ├── charts/             # Final repository-safe SVG summaries
-│   ├── maps/               # Cartographic product notes
-│   └── tables/             # Final numerical summaries
-├── scripts/                # Analysis workflows
-└── validation/             # Repository and validation records
-```
-
-## Tools
-
-Google Earth Engine · Python · Rasterio · GeoPandas · Pandas · NumPy · scikit-learn · Matplotlib · Google Colab · Git · GitHub
-
-## Limitations
-
-- The final independent holdout contains 16 samples.
-- Landsat's 30 m resolution can produce mixed pixels in heterogeneous urban areas.
-- The four-class scheme generalises more detailed urban and environmental land-cover types.
-- Spectral and temporal consistency tests do not replace independent reference data.
-- Change detection quantifies mapped conversion but does not establish its socioeconomic causes.
-
-## Documentation
+The repository contains the final comparison map, summary charts, transition tables, methods, results and limitations. The main supporting files are:
 
 - [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)
 - [`docs/RESULTS.md`](docs/RESULTS.md)
@@ -136,15 +98,23 @@ Google Earth Engine · Python · Rasterio · GeoPandas · Pandas · NumPy · sci
 - [`outputs/tables/lulc_area_change_summary.csv`](outputs/tables/lulc_area_change_summary.csv)
 - [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv)
 
+## Tools
+
+Google Earth Engine · Python · Rasterio · GeoPandas · Pandas · NumPy · scikit-learn · Matplotlib · Google Colab · Git · GitHub
+
+## Limitations
+
+The final independent holdout contains only 16 samples. Landsat's 30 m pixels can also mix more than one surface type in dense or fragmented urban areas, and the four-class scheme simplifies a much more complex landscape.
+
+The analysis is therefore best used for broad land-cover change and urban-growth interpretation rather than parcel-level decisions.
+
 ## Author
 
 **Abdullah Abdazeez Ayomide**  
-Geo-spatial Planner | GIS & Remote Sensing Analyst | Urban & Environmental Planning Researcher
+Geospatial Planner · GIS & Remote Sensing Analyst · Urban & Environmental Planning Researcher
 
-- [GitHub](https://github.com/Abdullahabdazeez)
-- [LinkedIn](https://ng.linkedin.com/in/abdazeez-abdullah-4b814719a)
-- [Email](mailto:abdazeezabdullah1@gmail.com)
+[GitHub](https://github.com/Abdullahabdazeez) · [LinkedIn](https://ng.linkedin.com/in/abdazeez-abdullah-4b814719a) · [Email](mailto:abdazeezabdullah1@gmail.com)
 
 ## Citation and licence
 
-Code is available under the MIT License. When citing results, use the **final reconstructed and frozen 2013–2023 outputs** rather than superseded statistics from the original workflow.
+Code is available under the MIT License. For any citation or reuse of the results, use the **final reconstructed 2013–2023 outputs** rather than statistics from the superseded workflow.
