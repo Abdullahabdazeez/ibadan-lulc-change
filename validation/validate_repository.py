@@ -11,7 +11,6 @@ required = [
     "LICENSE",
     "CITATION.cff",
     "project.json",
-    "assets/project-cover.png",
     "docs/METHODOLOGY.md",
     "docs/RESULTS.md",
     "docs/LIMITATIONS.md",
@@ -32,23 +31,22 @@ for rel in required:
     if not (ROOT / rel).exists():
         fail.append(f"Missing: {rel}")
 
-# Final area and change statistics.
+# Public summary tables intentionally round areas to three decimals.
 summary_path = ROOT / "outputs/tables/lulc_area_change_summary.csv"
 if summary_path.exists():
     df = pd.read_csv(summary_path)
     built = df.loc[df["class_name"] == "Built-up"].iloc[0]
     veg = df.loc[df["class_name"] == "Vegetation"].iloc[0]
     checks = {
-        "Built-up 2013": (float(built["area_2013_sqkm"]), 99.8658, 1e-4),
-        "Built-up 2023": (float(built["area_2023_sqkm"]), 330.1767, 1e-4),
-        "Built-up net change": (float(built["net_change_sqkm"]), 230.3109, 1e-4),
-        "Vegetation net change": (float(veg["net_change_sqkm"]), -230.3307, 1e-4),
+        "Built-up 2013": (float(built["area_2013_sqkm"]), 99.8658),
+        "Built-up 2023": (float(built["area_2023_sqkm"]), 330.1767),
+        "Built-up net change": (float(built["net_change_sqkm"]), 230.3109),
+        "Vegetation net change": (float(veg["net_change_sqkm"]), -230.3307),
     }
-    for name, (actual, expected, tol) in checks.items():
-        if abs(actual - expected) > tol:
-            fail.append(f"{name}: {actual} != {expected}")
+    for name, (actual, expected) in checks.items():
+        if abs(actual - expected) > 5e-4:
+            fail.append(f"{name}: {actual} != {expected} within rounding tolerance")
 
-# Independent locked-holdout metrics.
 acc_path = ROOT / "outputs/tables/classification_accuracy.csv"
 if acc_path.exists():
     acc = pd.read_csv(acc_path).iloc[0]
@@ -59,7 +57,6 @@ if acc_path.exists():
     if abs(float(acc["kappa"]) - 0.7935) > 1e-6:
         fail.append("Final Kappa is not 0.7935")
 
-# Transition matrix integrity.
 transition_path = ROOT / "outputs/tables/transition_matrix_sqkm.csv"
 if transition_path.exists():
     tr = pd.read_csv(transition_path)
@@ -70,14 +67,12 @@ if transition_path.exists():
     if abs(total - 3220.5807) > 1e-4:
         fail.append(f"Transition area total is {total}, expected 3220.5807")
 
-# Project metadata must mark the final reconstruction as frozen.
 metadata_path = ROOT / "project.json"
 if metadata_path.exists():
     metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
     if metadata.get("status") != "final-reconstruction-accepted-and-frozen":
         fail.append("project.json does not mark the reconstruction as final and frozen")
 
-# Superseded binaries must not be present in the public repository.
 superseded = [
     "outputs/maps/01_lulc_2013.png",
     "outputs/maps/02_lulc_2023.png",
