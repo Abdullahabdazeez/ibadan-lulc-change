@@ -88,7 +88,9 @@ This project measures mapped land-cover change. It does not claim that the image
 
 ## Outputs and documentation
 
-The repository contains the final comparison map, summary charts, transition tables, methods, results and limitations. The main supporting files are:
+For a shorter, plain-language account of the whole project, start with **[`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md)**.
+
+The repository also contains the detailed methods, results, limitations and machine-readable outputs:
 
 - [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)
 - [`docs/RESULTS.md`](docs/RESULTS.md)
