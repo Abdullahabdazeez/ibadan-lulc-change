@@ -4,15 +4,15 @@
   <img src="outputs/maps/final_lulc_comparison.svg" alt="Ibadan land-cover comparison for 2013 and 2023" width="100%">
 </p>
 
-## What this project asks
+## Planning question
 
-How did Ibadan's land cover change over ten years, and what type of land was most often converted as the city expanded?
+**How did Ibadan's land cover change between 2013 and 2023, and what type of land was most often converted as the city expanded?**
 
-I used Landsat imagery to map four broad classes — **Built-up, Vegetation, Water and Bare soil** — for 2013 and 2023. The final workflow was rebuilt after an audit of the earlier classification showed that the validation evidence needed to be stronger.
+This project uses Landsat imagery to map four broad land-cover classes — **Built-up, Vegetation, Water and Bare soil** — for 2013 and 2023. The analysis was designed around one practical planning objective: to measure the scale and spatial pattern of urban expansion and identify the dominant land-cover transitions associated with that growth.
 
-The important result is straightforward: **Ibadan expanded substantially, and most of the new built-up land had been mapped as vegetation in 2013.**
+The result is clear: **Ibadan expanded substantially, and most of the mapped new built-up land came from areas classified as vegetation in 2013.**
 
-## Main findings
+## Key findings
 
 | Indicator | Result |
 |---|---:|
@@ -26,46 +26,38 @@ The important result is straightforward: **Ibadan expanded substantially, and mo
 | Share of gross new built-up from vegetation | **99.14%** |
 | Changed landscape | **8.50%** |
 
-The dominant transition was **Vegetation → Built-up**, covering **246.104 km²**. That does not by itself explain *why* the conversion happened, but it clearly shows where the physical growth of the city was concentrated in the mapped landscape.
+The dominant mapped transition was **Vegetation → Built-up**, covering **246.104 km²**. This does not, by itself, explain the demographic or economic causes of expansion, but it clearly identifies where the physical growth of the city was concentrated in the mapped landscape.
 
-## Why I rebuilt the analysis
+## Validation
 
-The first version of this project produced attractive results, but a later audit raised questions about the strength of the validation evidence. Rather than keep those results, I rebuilt the classification and validation workflow.
+The final classification was evaluated using an independent **16-sample locked holdout** that was not used for model fitting or calibration selection.
 
-The final version uses seasonally matched Landsat predictors, blinded human review, leakage controls, a locked holdout and wall-to-wall consistency checks. The model was frozen before the holdout was opened.
+| Metric | Final result |
+|---|---:|
+| Correct cases | **14/16** |
+| Overall Accuracy | **0.8750** |
+| Balanced Accuracy | **0.9259** |
+| Macro F1 | **0.6354** |
+| Cohen's Kappa | **0.7935** |
 
-## Independent validation
-
-The strongest final test is a **16-sample locked holdout** that was not used for fitting or calibration selection.
-
-| Metric | Earlier baseline | Final model |
-|---|---:|---:|
-| Correct cases | 6/16 | **14/16** |
-| Overall Accuracy | 0.3750 | **0.8750** |
-| Balanced Accuracy | 0.2593 | **0.9259** |
-| Macro F1 | 0.2448 | **0.6354** |
-| Cohen's Kappa | 0.1304 | **0.7935** |
-
-The repaired model corrected **8** previously wrong holdout cases and introduced **0 regressions**.
-
-The holdout is small, so I do not treat the percentage scores as more precise than they really are. The raw case count is just as important here.
+Because the holdout is small, the raw case count is reported alongside the percentage-based metrics rather than treating the percentages as more precise than the evidence supports.
 
 ## Data and model
 
 The final classification uses Landsat surface-reflectance bands **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6 and SR_B7**, together with **NDVI, NDBI and MNDWI**. Both years were aligned to the same **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**.
 
-A Random Forest classifier was used for the four land-cover classes.
+A Random Forest classifier was used to map the four land-cover classes.
 
-## How the final workflow was built
+## Workflow
 
-1. Rebuilt comparable 2013 and 2023 Landsat predictor stacks.
-2. Reconstructed the reference data and reviewed difficult cases blindly.
-3. Separated calibration samples from a locked independent holdout.
-4. Selected the repair without looking at holdout labels.
-5. Froze the model and then opened the holdout.
-6. Reclassified both years on one common analysis footprint.
-7. Checked spectral, temporal and spatial consistency.
-8. Produced the final change maps and transition tables only after the classification was accepted.
+1. Prepared comparable 2013 and 2023 Landsat predictor stacks.
+2. Developed and reviewed reference samples for the four land-cover classes.
+3. Separated calibration data from an independent locked holdout.
+4. Trained and selected the final classification model.
+5. Classified both years on one common analysis footprint.
+6. Evaluated spectral, temporal and spatial consistency.
+7. Measured land-cover transitions and built-up expansion.
+8. Produced final maps, charts and machine-readable planning evidence.
 
 ## Land-cover transitions
 
@@ -80,18 +72,19 @@ All values below are in km².
 
 The machine-readable table is available at [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv).
 
-## What the result means for planning
+## Planning implications
 
-The pattern points to rapid outward growth and a large loss of land previously mapped as vegetation. For planners, that strengthens the case for monitoring peri-urban expansion, protecting important green areas, coordinating infrastructure with new development and paying closer attention to the cumulative effect of small land conversions at the urban edge.
+The pattern points to rapid outward growth and substantial conversion of land previously mapped as vegetation. For planners, this supports closer monitoring of peri-urban expansion, stronger coordination between infrastructure provision and new development, and greater attention to the protection of important green areas at the urban edge.
 
-This project measures mapped land-cover change. It does not claim that the imagery alone can identify the demographic, economic or regulatory causes behind that change.
+This project measures mapped land-cover change. The imagery identifies where physical conversion occurred, while the demographic, economic and regulatory drivers behind that change require separate evidence.
 
-## Outputs and documentation
+## Maps and outputs
 
-For a shorter, plain-language account of the whole project, start with **[`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md)**.
+The final cartographic products are organised in [`outputs/maps`](outputs/maps/), while charts and machine-readable tables are available in [`outputs/charts`](outputs/charts/) and [`outputs/tables`](outputs/tables/).
 
-The repository also contains the detailed methods, results, limitations and machine-readable outputs:
+Supporting documentation includes:
 
+- [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md)
 - [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)
 - [`docs/RESULTS.md`](docs/RESULTS.md)
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md)
@@ -106,17 +99,17 @@ Google Earth Engine · Python · Rasterio · GeoPandas · Pandas · NumPy · sci
 
 ## Limitations
 
-The final independent holdout contains only 16 samples. Landsat's 30 m pixels can also mix more than one surface type in dense or fragmented urban areas, and the four-class scheme simplifies a much more complex landscape.
+The independent holdout contains 16 samples. Landsat's 30 m pixels can also contain more than one surface type in dense or fragmented urban areas, while the four-class scheme simplifies a more complex urban landscape.
 
-The analysis is therefore best used for broad land-cover change and urban-growth interpretation rather than parcel-level decisions.
+The results are therefore most appropriate for broad land-cover change and urban-growth interpretation rather than parcel-level decisions.
 
 ## Author
 
 **Abdullah Abdazeez Ayomide**  
-Geospatial Planner · GIS & Remote Sensing Analyst · Urban & Environmental Planning Researcher
+Urban & Regional Planner · GIS & Remote Sensing · Spatial Decision Support
 
 [GitHub](https://github.com/Abdullahabdazeez) · [LinkedIn](https://ng.linkedin.com/in/abdazeez-abdullah-4b814719a) · [Email](mailto:abdazeezabdullah1@gmail.com)
 
 ## Citation and licence
 
-Code is available under the MIT License. For any citation or reuse of the results, use the **final reconstructed 2013–2023 outputs** rather than statistics from the superseded workflow.
+Code is available under the MIT License. Results and visual outputs should be cited from this repository and attributed to **Abdullah Abdazeez Ayomide (2026)**.
