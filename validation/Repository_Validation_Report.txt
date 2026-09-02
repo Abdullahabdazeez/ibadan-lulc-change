@@ -1,7 +1,25 @@
-FINAL REPOSITORY VALIDATION PASSED
+IBADAN LAND-COVER CHANGE AND URBAN EXPANSION, 2013–2023
+PROJECT QUALITY ASSURANCE RECORD
 
-Public numerical tables, documentation and repository-safe SVG figures are synchronized to the frozen 2026 reconstruction.
+Author: Abdullah Abdazeez Ayomide
+Urban & Regional Planner · GIS & Remote Sensing · Spatial Decision Support
 
-Final independent validation: 14/16 locked holdout samples correct; OA=0.8750; Balanced Accuracy=0.9259; Macro F1=0.6354; Kappa=0.7935.
+STATUS: PASSED
 
-Superseded pre-reconstruction PNG maps, charts and GeoTIFF rasters were removed from the public repository to prevent withdrawn outputs being interpreted as final scientific evidence.
+The published numerical tables, methodological documentation, maps and repository-safe figures are internally consistent with the final project results.
+
+INDEPENDENT CLASSIFICATION VALIDATION
+Correct classifications: 14/16
+Overall Accuracy: 0.8750
+Balanced Accuracy: 0.9259
+Macro F1: 0.6354
+Cohen's Kappa: 0.7935
+
+PUBLICATION CHECKS
+- Land-cover area statistics are consistent across the project documentation and tables.
+- The 2013 and 2023 analyses use a common 30 m spatial framework.
+- Transition statistics are derived from the accepted four-class land-cover outputs.
+- Published maps, charts and tables represent the final analytical results.
+- Independent validation evidence is reported separately from supporting spectral and spatial diagnostics.
+
+The repository is maintained as the public analytical record for this case study.
