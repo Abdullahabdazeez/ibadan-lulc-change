@@ -1,10 +1,33 @@
-# Limitations
+# Study Limitations and Interpretation
 
-- The final independent locked holdout contains **16 samples**. Percentage metrics should therefore be interpreted together with the raw result of **14/16 correctly classified**.
-- Per-class precision, recall and F1 values with very small support should be treated cautiously.
-- Landsat's **30 m** pixels can mix roofs, roads, vegetation, soil and other land-cover types within one cell, especially in heterogeneous urban areas and along class boundaries.
-- The final map uses four broad classes—Built-up, Vegetation, Water and Bare soil—and does not distinguish detailed urban land uses, vegetation types or agricultural categories.
-- Spectral consistency checks using NDVI, NDBI and MNDWI are plausibility diagnostics, not independent ground-truth validation.
-- Temporal and spatial consistency checks support interpretation of the reconstruction but do not directly measure classification correctness.
-- The transition analysis quantifies mapped land-cover conversion. It does not establish the demographic, economic, institutional or regulatory causes of change without additional evidence.
-- The maps are suitable for regional and metropolitan-scale analysis, but higher-resolution imagery and field evidence should be used before parcel-level regulatory or site-specific decisions.
+The project is designed for **metropolitan-scale land-cover change assessment and urban-growth interpretation**. The following considerations define the appropriate use of the results.
+
+## Spatial resolution
+
+Landsat imagery has a **30 m spatial resolution**. Individual pixels may therefore contain combinations of roofs, roads, vegetation, exposed soil or water, particularly along urban edges and within heterogeneous neighbourhoods. The resulting maps are appropriate for city-scale pattern analysis rather than parcel-level development control.
+
+## Classification detail
+
+The analysis uses four broad land-cover classes — **Built-up, Vegetation, Water and Bare soil**. These classes provide a consistent basis for measuring physical landscape change but do not distinguish individual urban land uses, vegetation communities, agricultural systems or building types.
+
+## Independent validation
+
+Final predictive performance is assessed using a **16-sample independent holdout**, with **14 of 16 samples correctly classified**. The holdout provides evidence independent of model fitting, while its limited size means that percentage metrics are interpreted alongside the underlying case count. Per-class statistics with small sample support should likewise be interpreted cautiously.
+
+## Spectral interpretation
+
+NDVI, NDBI and MNDWI provide useful spectral evidence for vegetation, built-up surfaces and water. Their wall-to-wall consistency patterns support interpretation of the classified maps but are not substitutes for independent reference observations.
+
+## Change attribution
+
+Post-classification comparison identifies the **location, direction and magnitude of mapped land-cover transitions**. It does not independently establish the demographic, economic, institutional or regulatory causes of urban expansion. Explaining those drivers requires complementary socioeconomic, planning-policy and field evidence.
+
+## Appropriate application
+
+The outputs support metropolitan planning, urban-growth monitoring, environmental assessment and identification of areas experiencing substantial land-cover conversion. Higher-resolution imagery, cadastral information and field verification should be incorporated before site-specific or regulatory decisions are made.
+
+---
+
+**Project:** Ibadan Land-Cover Change and Urban Expansion, 2013–2023  
+**Author:** Abdullah Abdazeez Ayomide  
+Urban & Regional Planner · GIS & Remote Sensing · Spatial Decision Support
