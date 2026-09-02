@@ -25,13 +25,13 @@ These figures describe mapped land-cover change; they do not by themselves estab
 
 ## Cartographic standard
 
-The final maps were produced from the accepted 2013 and 2023 classifications on a common **30 m** analysis grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. Public-facing maps should retain a clear title, legend, scale information, north arrow where appropriate, study-area context, data/source note and author attribution.
+The maps were produced from the final 2013 and 2023 classifications on a common **30 m** analysis grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. Public-facing outputs should retain a clear title, legend, scale information, north arrow where appropriate, study-area context, data/source note and author attribution.
 
-## Interpretation
+## Planning interpretation
 
-For planning, the map series provides spatial evidence for monitoring peri-urban expansion, coordinating infrastructure with new development and identifying areas where continued conversion may place pressure on green land at the urban edge.
+The map series provides spatial evidence for monitoring peri-urban expansion, coordinating infrastructure with new development and identifying areas where continued conversion may place pressure on green land at the urban edge.
 
-Detailed validation and reconstruction records are retained separately in the repository's validation and technical documentation so that this gallery remains focused on the final planning evidence.
+Validation details, methodological documentation and machine-readable results are organised separately in the repository so that this gallery remains focused on the final planning evidence.
 
 ---
 
