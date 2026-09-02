@@ -1,37 +1,39 @@
 # Maps — Ibadan Land-Cover Change and Urban Expansion
 
-These maps present the cartographic evidence behind my analysis of land-cover change and urban expansion in Ibadan between 2013 and 2023. Together, they show the city's land-cover pattern at the beginning and end of the study period, where major transitions occurred, and how the built-up footprint expanded across the metropolitan landscape.
+These maps present the spatial evidence behind my analysis of land-cover change and urban expansion in Ibadan between 2013 and 2023.
 
 ## Planning question
 
 **How did Ibadan's land cover change between 2013 and 2023, and what type of land was most often converted as the city expanded?**
 
-## Final map series
+## 2013–2023 land-cover comparison
 
-| Map | What it communicates |
-|---|---|
-| **Ibadan LULC 2013** | Baseline distribution of Built-up, Vegetation, Water and Bare soil across the study area. |
-| **Ibadan LULC 2023** | Land-cover pattern at the end of the ten-year study period. |
-| **2013–2023 LULC Comparison** | Side-by-side view of the two classified years for direct visual comparison. |
-| **Land-Cover Transition Map** | Locations where land changed from one mapped class to another. |
-| **Built-up Expansion Map** | Areas that became built-up between 2013 and 2023, highlighting the spatial pattern of urban expansion. |
-| **Stable vs Changed Map** | Separates persistent land cover from locations where a class transition was detected. |
+![Ibadan land-cover comparison, 2013 and 2023](final_lulc_comparison.svg)
+
+*The final comparison places the 2013 and 2023 land-cover evidence side by side, making the expansion of the built-up footprint and the corresponding change in other mapped land-cover classes directly visible.*
 
 ## Key evidence
 
 Built-up land increased from **99.866 km² in 2013** to **330.177 km² in 2023**, a net increase of **230.311 km²**. The dominant mapped transition into new built-up land was **Vegetation → Built-up (246.104 km²)**.
 
-These figures describe mapped land-cover change; they do not by themselves establish the demographic, economic or regulatory causes of expansion.
+## Map series
 
-## Cartographic standard
+The complete cartographic series developed for the case study covers:
 
-The maps were produced from the final 2013 and 2023 classifications on a common **30 m** analysis grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. Public-facing outputs should retain a clear title, legend, scale information, north arrow where appropriate, study-area context, data/source note and author attribution.
+- **Ibadan LULC 2013** — baseline land-cover pattern;
+- **Ibadan LULC 2023** — land-cover pattern at the end of the study period;
+- **2013–2023 LULC Comparison** — direct visual comparison of both years;
+- **Land-Cover Transition Map** — locations where mapped classes changed;
+- **Built-up Expansion Map** — areas converted to built-up land; and
+- **Stable vs Changed Map** — persistent and transitioned land-cover areas.
+
+The repository currently displays the comparison figure that is available as a publication-ready repository asset. Additional final cartographic plates can be added to this gallery in the same format once their image files are included in the repository.
 
 ## Planning interpretation
 
-The map series provides spatial evidence for monitoring peri-urban expansion, coordinating infrastructure with new development and identifying areas where continued conversion may place pressure on green land at the urban edge.
+The spatial pattern provides evidence for monitoring peri-urban expansion, coordinating infrastructure with new development and identifying areas where continued conversion may place pressure on green land at the urban edge.
 
-Validation details, methodological documentation and machine-readable results are organised separately in the repository so that this gallery remains focused on the final planning evidence.
+The maps use a common **30 m analysis grid** in **WGS 84 / UTM Zone 31N (EPSG:32631)**, allowing direct comparison between the two study years.
 
 ---
 
