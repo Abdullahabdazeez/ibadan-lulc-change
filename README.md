@@ -28,6 +28,32 @@ The result is clear: **Ibadan expanded substantially, and most of the mapped new
 
 The dominant mapped transition was **Vegetation → Built-up**, covering **246.104 km²**. This does not, by itself, explain the demographic or economic causes of expansion, but it clearly identifies where the physical growth of the city was concentrated in the mapped landscape.
 
+## Visual evidence
+
+### Land-cover area comparison
+
+<p align="center">
+  <img src="outputs/charts/final_area_comparison.svg" alt="Ibadan land-cover area comparison, 2013 and 2023" width="85%">
+</p>
+
+*The area comparison shows the change in mapped Built-up, Vegetation, Water and Bare soil between the two study years.*
+
+### Net land-cover change
+
+<p align="center">
+  <img src="outputs/charts/final_change_summary.svg" alt="Ibadan net land-cover change summary, 2013 to 2023" width="85%">
+</p>
+
+*Built-up land recorded the dominant positive change, while Vegetation experienced the largest net decline.*
+
+### Classification validation
+
+<p align="center">
+  <img src="outputs/charts/final_validation.svg" alt="Independent validation of the Ibadan land-cover classification" width="75%">
+</p>
+
+*Independent holdout performance provides the validation evidence used to interpret the mapped results.*
+
 ## Validation
 
 The final classification was evaluated using an independent **16-sample locked holdout** that was not used for model fitting or calibration selection.
