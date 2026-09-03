@@ -1,7 +1,7 @@
 # Ibadan Land-Cover Change and Urban Expansion, 2013–2023
 
 <p align="center">
-  <img src="outputs/maps/final_lulc_comparison.svg" alt="Ibadan land-cover comparison for 2013 and 2023" width="100%">
+  <img src="outputs/maps/04_Land_Cover_Comparison_2013_2023.png" alt="Ibadan land-cover comparison for 2013 and 2023" width="100%">
 </p>
 
 ## Planning question
@@ -27,16 +27,33 @@ The central finding is straightforward: **built-up land increased from about 100
 | Stable landscape | **91.50%** |
 | Changed landscape | **8.50%** |
 
+## Map suite
+
+The final map suite was regenerated directly from the accepted 2013 and 2023 classification rasters and is available in both PNG and PDF formats.
+
+| Map | PNG | PDF |
+|---|---|---|
+| Study area | [View](outputs/maps/01_Study_Area.png) | [PDF](outputs/maps/01_Study_Area.pdf) |
+| Land cover, 2013 | [View](outputs/maps/02_Land_Cover_2013.png) | [PDF](outputs/maps/02_Land_Cover_2013.pdf) |
+| Land cover, 2023 | [View](outputs/maps/03_Land_Cover_2023.png) | [PDF](outputs/maps/03_Land_Cover_2023.pdf) |
+| 2013–2023 comparison | [View](outputs/maps/04_Land_Cover_Comparison_2013_2023.png) | [PDF](outputs/maps/04_Land_Cover_Comparison_2013_2023.pdf) |
+| Built-up expansion | [View](outputs/maps/05_Builtup_Expansion_2013_2023.png) | [PDF](outputs/maps/05_Builtup_Expansion_2013_2023.pdf) |
+| Major transitions | [View](outputs/maps/06_Land_Cover_Transitions_2013_2023.png) | [PDF](outputs/maps/06_Land_Cover_Transitions_2013_2023.pdf) |
+| Stable vs changed land | [View](outputs/maps/07_Stable_vs_Changed_2013_2023.png) | [PDF](outputs/maps/07_Stable_vs_Changed_2013_2023.pdf) |
+
 ## Visual evidence
 
 ### Land-cover area comparison
-<p align="center"><img src="outputs/charts/final_area_comparison.svg" alt="Land-cover area comparison" width="85%"></p>
+<p align="center"><img src="outputs/charts/portfolio_area_comparison.png" alt="Land-cover area comparison" width="85%"></p>
 
 ### Net land-cover change
-<p align="center"><img src="outputs/charts/final_change_summary.svg" alt="Net land-cover change" width="85%"></p>
+<p align="center"><img src="outputs/charts/portfolio_net_change.png" alt="Net land-cover change" width="85%"></p>
+
+### Origin of new built-up land
+<p align="center"><img src="outputs/charts/portfolio_new_builtup_origin.png" alt="Origin of new built-up land" width="80%"></p>
 
 ### Classification validation
-<p align="center"><img src="outputs/charts/final_validation.svg" alt="Classification validation" width="75%"></p>
+<p align="center"><img src="outputs/charts/portfolio_validation.png" alt="Classification validation" width="75%"></p>
 
 ## Method
 
@@ -73,12 +90,7 @@ Of the **248.235 km²** of gross new built-up land, **99.14%** had been classifi
 
 ## Planning value
 
-The spatial pattern points to substantial outward growth and pressure on peripheral green and open land. For planning practice, the results support:
-
-- closer monitoring of urban growth fronts;
-- stronger coordination between infrastructure provision and new development;
-- integration of green-space protection into expansion strategies; and
-- periodic remote-sensing updates to support development management.
+The spatial pattern points to substantial outward growth and pressure on peripheral green and open land. For planning practice, the results support closer monitoring of urban growth fronts, stronger coordination between infrastructure provision and new development, green-space protection, and periodic remote-sensing updates for development management.
 
 The analysis identifies **where physical land-cover conversion occurred**. It does not, on its own, establish the demographic, economic or regulatory causes of that change.
 
@@ -93,17 +105,16 @@ All values are km².
 | **Water** | 0.0072 | 1.5570 | 3.4992 | 0.0000 |
 | **Bare soil** | 2.1240 | 1.2636 | 0.0009 | 0.0297 |
 
-Machine-readable results are available in [`outputs/tables`](outputs/tables/).
-
 ## Repository guide
 
-- [`outputs/maps`](outputs/maps/) — final cartographic outputs
+- [`outputs/maps`](outputs/maps/) — final seven-map PNG/PDF suite
 - [`outputs/charts`](outputs/charts/) — statistical and validation figures
 - [`outputs/tables`](outputs/tables/) — machine-readable results
 - [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) — analytical method
 - [`docs/RESULTS.md`](docs/RESULTS.md) — detailed findings
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) — interpretation boundaries
-- [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md) — project report
+- [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md) — report source
+- [`reports/Ibadan_LULC_2013_2023_Portfolio_Report.pdf`](reports/Ibadan_LULC_2013_2023_Portfolio_Report.pdf) — portfolio PDF report
 
 ## Tools
 
