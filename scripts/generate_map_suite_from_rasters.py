@@ -8,8 +8,8 @@ from matplotlib.patches import Patch
 
 ROOT=Path('.')
 OUT=ROOT/'outputs'/'maps'; OUT.mkdir(parents=True, exist_ok=True)
-P13=ROOT/'data'/'authoritative'/'Ibadan_LULC_2013_FINAL.tif'
-P23=ROOT/'data'/'authoritative'/'Ibadan_LULC_2023_FINAL.tif'
+P13=ROOT/'data'/'authoritative'/'Ibadan_LULC_2013_FINAL.tif.tiff'
+P23=ROOT/'data'/'authoritative'/'Ibadan_LULC_2023_FINAL.tif.tiff'
 BND=ROOT/'data'/'processed'/'boundary'/'Ibadan_Metropolitan_Boundary.shp'
 COLORS=['#d84a3a','#4f9d55','#3b82b8','#a87948']
 LABELS=['Built-up','Vegetation','Water','Bare soil']
