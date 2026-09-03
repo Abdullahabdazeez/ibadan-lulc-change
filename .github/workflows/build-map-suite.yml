@@ -49,3 +49,5 @@ jobs:
           git add outputs/maps/0*.png outputs/maps/0*.pdf
           git diff --cached --quiet || git commit -m "Generate full portfolio map suite"
           git push origin HEAD:portfolio-assets
+
+# trigger: 2026-09-03 full-map-suite
