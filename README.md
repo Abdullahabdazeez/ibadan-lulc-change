@@ -6,88 +6,85 @@
 
 ## Planning question
 
-**How did Ibadan's land cover change between 2013 and 2023, and what type of land was most often converted as the city expanded?**
+**How did Ibadan's land cover change between 2013 and 2023, and what types of land were converted as the city expanded?**
 
-This project uses Landsat imagery to map four broad land-cover classes — **Built-up, Vegetation, Water and Bare soil** — for 2013 and 2023. The analysis was designed around one practical planning objective: to measure the scale and spatial pattern of urban expansion and identify the dominant land-cover transitions associated with that growth.
+Ibadan expanded substantially during the decade. I used Landsat surface-reflectance imagery, spectral indices and Random Forest classification to map four broad land-cover classes — **Built-up, Vegetation, Water and Bare soil** — on the same 30 m analysis footprint for 2013 and 2023.
 
-The result is clear: **Ibadan expanded substantially, and most of the mapped new built-up land came from areas classified as vegetation in 2013.**
+The central finding is straightforward: **built-up land increased from about 100 km² to 330 km², and almost all gross new built-up land was mapped as vegetation ten years earlier.**
 
 ## Key findings
 
 | Indicator | Result |
 |---|---:|
 | Analysis area | **3,220.581 km²** |
-| Built-up area, 2013 | **99.866 km² (3.101%)** |
-| Built-up area, 2023 | **330.177 km² (10.252%)** |
+| Built-up, 2013 | **99.866 km² (3.101%)** |
+| Built-up, 2023 | **330.177 km² (10.252%)** |
 | Net built-up increase | **230.311 km²** |
 | Relative built-up increase | **230.62%** |
 | Gross new built-up land | **248.235 km²** |
 | Vegetation → Built-up | **246.104 km²** |
-| Share of gross new built-up from vegetation | **99.14%** |
+| Gross new built-up originating from vegetation | **99.14%** |
+| Stable landscape | **91.50%** |
 | Changed landscape | **8.50%** |
-
-The dominant mapped transition was **Vegetation → Built-up**, covering **246.104 km²**. This does not, by itself, explain the demographic or economic causes of expansion, but it clearly identifies where the physical growth of the city was concentrated in the mapped landscape.
 
 ## Visual evidence
 
 ### Land-cover area comparison
-
-<p align="center">
-  <img src="outputs/charts/final_area_comparison.svg" alt="Ibadan land-cover area comparison, 2013 and 2023" width="85%">
-</p>
-
-*The area comparison shows the change in mapped Built-up, Vegetation, Water and Bare soil between the two study years.*
+<p align="center"><img src="outputs/charts/final_area_comparison.svg" alt="Land-cover area comparison" width="85%"></p>
 
 ### Net land-cover change
-
-<p align="center">
-  <img src="outputs/charts/final_change_summary.svg" alt="Ibadan net land-cover change summary, 2013 to 2023" width="85%">
-</p>
-
-*Built-up land recorded the dominant positive change, while Vegetation experienced the largest net decline.*
+<p align="center"><img src="outputs/charts/final_change_summary.svg" alt="Net land-cover change" width="85%"></p>
 
 ### Classification validation
+<p align="center"><img src="outputs/charts/final_validation.svg" alt="Classification validation" width="75%"></p>
 
-<p align="center">
-  <img src="outputs/charts/final_validation.svg" alt="Independent validation of the Ibadan land-cover classification" width="75%">
-</p>
+## Method
 
-*Independent holdout performance provides the validation evidence used to interpret the mapped results.*
+The analysis used Landsat surface-reflectance bands **SR_B2–SR_B7** together with **NDVI, NDBI and MNDWI**. Both years were aligned to a common **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. A Random Forest classifier mapped the four land-cover classes, followed by post-classification change and transition analysis.
+
+The workflow was:
+
+1. Prepare comparable Landsat predictor stacks for 2013 and 2023.
+2. Develop reference samples for Built-up, Vegetation, Water and Bare soil.
+3. Train the Random Forest classification model.
+4. Classify both years on one common analysis footprint.
+5. Evaluate the accepted classification with an independent holdout.
+6. Calculate class areas, net change, transitions and built-up expansion.
+7. Translate the results into planning-focused maps, charts and tables.
 
 ## Validation
 
-The final classification was evaluated using an independent **16-sample locked holdout** that was not used for model fitting or calibration selection.
+The independent holdout contained **16 samples**, of which **14 were correctly classified**.
 
-| Metric | Final result |
+| Metric | Result |
 |---|---:|
-| Correct cases | **14/16** |
 | Overall Accuracy | **0.8750** |
 | Balanced Accuracy | **0.9259** |
 | Macro F1 | **0.6354** |
 | Cohen's Kappa | **0.7935** |
 
-Because the holdout is small, the raw case count is reported alongside the percentage-based metrics rather than treating the percentages as more precise than the evidence supports.
+Because the holdout is small, these metrics should be interpreted together with the raw **14/16** result.
 
-## Data and model
+## What changed?
 
-The final classification uses Landsat surface-reflectance bands **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6 and SR_B7**, together with **NDVI, NDBI and MNDWI**. Both years were aligned to the same **30 m** grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**.
+Built-up land increased by **230.311 km²** while vegetation declined by **230.331 km²**. The dominant mapped transition was **Vegetation → Built-up**, covering **246.104 km²**.
 
-A Random Forest classifier was used to map the four land-cover classes.
+Of the **248.235 km²** of gross new built-up land, **99.14%** had been classified as vegetation in 2013. This makes vegetation conversion the defining land-cover pattern associated with Ibadan's mapped urban expansion during the study period.
 
-## Workflow
+## Planning value
 
-1. Prepared comparable 2013 and 2023 Landsat predictor stacks.
-2. Developed and reviewed reference samples for the four land-cover classes.
-3. Separated calibration data from an independent locked holdout.
-4. Trained and selected the final classification model.
-5. Classified both years on one common analysis footprint.
-6. Evaluated spectral, temporal and spatial consistency.
-7. Measured land-cover transitions and built-up expansion.
-8. Produced final maps, charts and machine-readable planning evidence.
+The spatial pattern points to substantial outward growth and pressure on peripheral green and open land. For planning practice, the results support:
 
-## Land-cover transitions
+- closer monitoring of urban growth fronts;
+- stronger coordination between infrastructure provision and new development;
+- integration of green-space protection into expansion strategies; and
+- periodic remote-sensing updates to support development management.
 
-All values below are in km².
+The analysis identifies **where physical land-cover conversion occurred**. It does not, on its own, establish the demographic, economic or regulatory causes of that change.
+
+## Land-cover transition matrix
+
+All values are km².
 
 | 2013 → 2023 | Built-up | Vegetation | Water | Bare soil |
 |---|---:|---:|---:|---:|
@@ -96,46 +93,37 @@ All values below are in km².
 | **Water** | 0.0072 | 1.5570 | 3.4992 | 0.0000 |
 | **Bare soil** | 2.1240 | 1.2636 | 0.0009 | 0.0297 |
 
-The machine-readable table is available at [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv).
+Machine-readable results are available in [`outputs/tables`](outputs/tables/).
 
-## Planning implications
+## Repository guide
 
-The pattern points to rapid outward growth and substantial conversion of land previously mapped as vegetation. For planners, this supports closer monitoring of peri-urban expansion, stronger coordination between infrastructure provision and new development, and greater attention to the protection of important green areas at the urban edge.
-
-This project measures mapped land-cover change. The imagery identifies where physical conversion occurred, while the demographic, economic and regulatory drivers behind that change require separate evidence.
-
-## Maps and outputs
-
-The final cartographic products are organised in [`outputs/maps`](outputs/maps/), while charts and machine-readable tables are available in [`outputs/charts`](outputs/charts/) and [`outputs/tables`](outputs/tables/).
-
-Supporting documentation includes:
-
-- [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md)
-- [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md)
-- [`docs/RESULTS.md`](docs/RESULTS.md)
-- [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md)
-- [`outputs/tables/key_findings.csv`](outputs/tables/key_findings.csv)
-- [`outputs/tables/classification_accuracy.csv`](outputs/tables/classification_accuracy.csv)
-- [`outputs/tables/lulc_area_change_summary.csv`](outputs/tables/lulc_area_change_summary.csv)
-- [`outputs/tables/transition_matrix_sqkm.csv`](outputs/tables/transition_matrix_sqkm.csv)
+- [`outputs/maps`](outputs/maps/) — final cartographic outputs
+- [`outputs/charts`](outputs/charts/) — statistical and validation figures
+- [`outputs/tables`](outputs/tables/) — machine-readable results
+- [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) — analytical method
+- [`docs/RESULTS.md`](docs/RESULTS.md) — detailed findings
+- [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) — interpretation boundaries
+- [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md) — project report
 
 ## Tools
 
-Google Earth Engine · Python · Rasterio · GeoPandas · Pandas · NumPy · scikit-learn · Matplotlib · Google Colab · Git · GitHub
+Google Earth Engine · Landsat Collection 2 Surface Reflectance · Python · Rasterio · GeoPandas · Pandas · NumPy · scikit-learn · Matplotlib · GIS · Git · GitHub
 
 ## Limitations
 
-The independent holdout contains 16 samples. Landsat's 30 m pixels can also contain more than one surface type in dense or fragmented urban areas, while the four-class scheme simplifies a more complex urban landscape.
+- The independent holdout contains only **16 samples**.
+- Landsat's **30 m** resolution can produce mixed pixels in heterogeneous urban areas.
+- The four-class system generalises more detailed urban and environmental land-cover categories.
+- Spectral consistency does not substitute for independent ground-reference observations.
+- Land-cover transitions do not establish socioeconomic, demographic or regulatory causation.
 
-The results are therefore most appropriate for broad land-cover change and urban-growth interpretation rather than parcel-level decisions.
+The results are therefore best used for **metropolitan-scale urban-growth and land-cover interpretation**, not parcel-level development decisions.
 
 ## Author
 
 **Abdullah Abdazeez Ayomide**  
 Urban & Regional Planner · GIS & Remote Sensing · Spatial Decision Support
 
-[GitHub](https://github.com/Abdullahabdazeez) · [LinkedIn](https://ng.linkedin.com/in/abdazeez-abdullah-4b814719a) · [Email](mailto:abdazeezabdullah1@gmail.com)
+## Citation
 
-## Citation and licence
-
-Code is available under the MIT License. Results and visual outputs should be cited from this repository and attributed to **Abdullah Abdazeez Ayomide (2026)**.
+**Abdullah Abdazeez Ayomide (2026). _Ibadan Land-Cover Change and Urban Expansion, 2013–2023_.**
