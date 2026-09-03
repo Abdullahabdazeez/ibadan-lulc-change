@@ -1,0 +1,51 @@
+name: Build full portfolio map suite
+
+on:
+  push:
+    branches: [portfolio-assets]
+    paths:
+      - 'scripts/generate_map_suite.py'
+      - '.github/workflows/build-map-suite.yml'
+      - 'outputs/maps/final_lulc_comparison.svg'
+      - 'data/processed/boundary/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: portfolio-assets
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install map dependencies
+        run: pip install numpy pillow scipy matplotlib pyshp
+      - name: Generate seven-map publication suite
+        run: python scripts/generate_map_suite.py
+      - name: Validate map outputs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          names=['01_Study_Area','02_Land_Cover_2013','03_Land_Cover_2023','04_Land_Cover_Comparison_2013_2023','05_Builtup_Expansion_2013_2023','06_Land_Cover_Transitions_2013_2023','07_Stable_vs_Changed_2013_2023']
+          for n in names:
+              png=Path('outputs/maps')/(n+'.png')
+              pdf=Path('outputs/maps')/(n+'.pdf')
+              assert png.exists() and png.stat().st_size>25000, f'Bad PNG: {png}'
+              assert pdf.exists() and pdf.stat().st_size>10000, f'Bad PDF: {pdf}'
+              im=Image.open(png); im.verify()
+              print(n, png.stat().st_size, pdf.stat().st_size)
+          print('MAP_SUITE_QA_PASS')
+          PY
+      - name: Commit generated map assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add outputs/maps/0*.png outputs/maps/0*.pdf
+          git diff --cached --quiet || git commit -m "Generate full portfolio map suite"
+          git push origin HEAD:portfolio-assets
