@@ -1,0 +1,1 @@
+Binary raster path normalization pending.
