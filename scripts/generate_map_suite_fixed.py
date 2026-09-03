@@ -1,17 +1,20 @@
-"""Robust entry point for the portfolio map-suite generator.
-
-The accepted comparison SVG stores its map image as a data URI. XML parsing is
-used here so encoded line breaks/entities in the href are resolved before
-base64 decoding.
-"""
+"""Robust entry point for the portfolio map-suite generator."""
 from io import BytesIO
 from pathlib import Path
 import base64
+import importlib.util
 import re
 import xml.etree.ElementTree as ET
 
 from PIL import Image
-import scripts.generate_map_suite as maps
+
+# Load the existing generator directly from its file path so this script works
+# when executed as `python scripts/generate_map_suite_fixed.py` in Actions.
+spec = importlib.util.spec_from_file_location(
+    'generate_map_suite', Path('scripts/generate_map_suite.py')
+)
+maps = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(maps)
 
 
 def load_comparison_image():
