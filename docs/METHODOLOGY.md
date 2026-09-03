@@ -2,33 +2,57 @@
 
 ## Analysis framework
 
-I compared land cover in Ibadan for 2013 and 2023 on an identical **30 m** analysis grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. The common study footprint contains **3,578,423 pixels**, equivalent to **3,220.581 km²**.
+I compared land cover across the Ibadan metropolitan study area for **2013 and 2023** using an identical **30 m** analysis grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. The common footprint contains **3,578,423 pixels**, equivalent to **3,220.581 km²**.
 
-Landsat surface-reflectance imagery provided the spectral basis for the analysis. I used **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6 and SR_B7** together with **NDVI, NDBI and MNDWI** to improve separation of the four mapped classes: Built-up, Vegetation, Water and Bare soil. A Random Forest classifier was used because it performs well with multi-band remote-sensing data and can model non-linear relationships between spectral predictors and land-cover classes.
+Four broad classes were mapped: **Built-up, Vegetation, Water and Bare soil**.
 
-## Reference data and model development
+## Predictor variables
 
-I used visually interpreted reference samples to support model development and independent evaluation, with particular attention to locations where Built-up, Vegetation and Bare soil were difficult to distinguish spectrally. The final reference design contained **48 reviewed samples** divided before final evaluation into:
+Landsat Collection 2 Surface Reflectance imagery provided the spectral basis for the analysis. The predictor stack included:
 
-- **32 calibration samples** used for model-development decisions; and
-- **16 locked holdout samples** reserved exclusively for independent evaluation.
+- SR_B2
+- SR_B3
+- SR_B4
+- SR_B5
+- SR_B6
+- SR_B7
+- NDVI
+- NDBI
+- MNDWI
 
-The locked holdout labels were excluded from model fitting, calibration weighting, feature selection, threshold selection and hyperparameter tuning. This separation provided an independent test of how well the final classifier generalised beyond the samples used during model development.
+A Random Forest classifier was used to model the relationship between these predictors and the four land-cover classes.
 
-## Validation and consistency checks
+## Reference data and validation design
 
-The primary independent validation evidence comes from the **16-sample locked holdout**. The classifier correctly classified **14 of 16 samples**, producing Overall Accuracy of **0.8750**, Balanced Accuracy of **0.9259**, Macro F1 of **0.6354** and Cohen's Kappa of **0.7935**.
+Visually interpreted reference samples supported model development and evaluation. The final reviewed reference set contained **48 samples**:
 
-I also used three supporting checks to assess the consistency of the mapped outputs:
+- **32 calibration samples** for model-development decisions; and
+- **16 holdout samples** reserved for independent evaluation.
 
-1. calibration-only out-of-fold evaluation during model development;
-2. wall-to-wall spectral checks using NDVI, NDBI and MNDWI; and
-3. temporal and spatial consistency checks, including identical analysis footprints and review of mapped change patterns.
+The holdout samples were excluded from model fitting and model-selection decisions. The accepted classifier correctly classified **14 of 16** holdout samples.
 
-These diagnostics are reported separately from the independent holdout metrics so that model-development evidence is not presented as additional independent accuracy.
+| Metric | Result |
+|---|---:|
+| Overall Accuracy | 0.8750 |
+| Balanced Accuracy | 0.9259 |
+| Macro F1 | 0.6354 |
+| Cohen's Kappa | 0.7935 |
+
+The small holdout size is an important limitation, so the raw **14/16** result is reported alongside the summary metrics.
 
 ## Change analysis
 
-I compared the accepted 2013 and 2023 classifications pixel by pixel to quantify both persistence and transition. The analysis produced a complete **4 × 4 transition matrix**, stable-versus-changed mapping, built-up expansion mapping, vegetation-to-built-up conversion, class-area summaries and net-change statistics.
+The accepted 2013 and 2023 classifications were compared pixel by pixel. The change analysis produced:
 
-This approach makes it possible to move beyond asking how much each land-cover class changed and examine **where change occurred and which land-cover transitions contributed most to Ibadan's expansion**.
+1. class-area summaries for both years;
+2. net change by land-cover class;
+3. a complete 4 × 4 transition matrix;
+4. built-up expansion mapping;
+5. vegetation-to-built-up conversion statistics; and
+6. stable-versus-changed mapping.
+
+This approach answers two different planning questions: **how much the landscape changed** and **which land-cover conversions were associated with urban expansion**.
+
+## Interpretation
+
+The analysis measures physical land-cover conversion visible in the imagery. It should not be interpreted as direct evidence of the demographic, economic or regulatory causes of urban expansion.
