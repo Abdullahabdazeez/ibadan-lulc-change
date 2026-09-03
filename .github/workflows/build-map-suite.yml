@@ -5,6 +5,7 @@ on:
     branches: [portfolio-assets]
     paths:
       - 'scripts/generate_map_suite.py'
+      - 'scripts/generate_map_suite_fixed.py'
       - '.github/workflows/build-map-suite.yml'
       - 'outputs/maps/final_lulc_comparison.svg'
       - 'data/processed/boundary/**'
@@ -26,7 +27,7 @@ jobs:
       - name: Install map dependencies
         run: pip install numpy pillow scipy matplotlib pyshp
       - name: Generate seven-map publication suite
-        run: python scripts/generate_map_suite.py
+        run: python scripts/generate_map_suite_fixed.py
       - name: Validate map outputs
         run: |
           python - <<'PY'
@@ -49,5 +50,3 @@ jobs:
           git add outputs/maps/0*.png outputs/maps/0*.pdf
           git diff --cached --quiet || git commit -m "Generate full portfolio map suite"
           git push origin HEAD:portfolio-assets
-
-# trigger: 2026-09-03 full-map-suite
