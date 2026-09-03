@@ -5,6 +5,7 @@ on:
     branches: [portfolio-assets]
     paths:
       - 'scripts/generate_portfolio_assets.py'
+      - 'scripts/validate_portfolio_assets.py'
       - '.github/workflows/build-portfolio-assets-on-push.yml'
 
 permissions:
@@ -20,8 +21,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install matplotlib numpy
+      - run: pip install matplotlib numpy pillow
       - run: python scripts/generate_portfolio_assets.py
+      - run: python scripts/validate_portfolio_assets.py
       - name: Commit generated PNG assets
         run: |
           git config user.name "github-actions[bot]"
