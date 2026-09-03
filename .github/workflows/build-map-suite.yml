@@ -1,6 +1,13 @@
 name: Build full portfolio map suite
 
 on:
+  push:
+    branches: [portfolio-assets]
+    paths:
+      - 'scripts/generate_map_suite_from_rasters.py'
+      - '.github/workflows/build-map-suite.yml'
+      - 'data/authoritative/**'
+      - 'data/processed/boundary/**'
   workflow_dispatch:
 
 permissions:
