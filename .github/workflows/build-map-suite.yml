@@ -1,13 +1,6 @@
 name: Build full portfolio map suite
 
 on:
-  push:
-    branches: [portfolio-assets]
-    paths:
-      - 'scripts/generate_map_suite_from_rasters.py'
-      - '.github/workflows/build-map-suite.yml'
-      - 'data/authoritative/**'
-      - 'data/processed/boundary/**'
   workflow_dispatch:
 
 permissions:
@@ -18,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: portfolio-assets
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -64,4 +55,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add outputs/maps/0*.png outputs/maps/0*.pdf
           git diff --cached --quiet || git commit -m "Generate authoritative portfolio map suite"
-          git push origin HEAD:portfolio-assets
+          git push
