@@ -24,8 +24,8 @@ jobs:
           from pathlib import Path
           import hashlib
           expected={
-            'data/authoritative/Ibadan_LULC_2013_FINAL.tif':'a5c3250f3044286ca29fc1ece13ddea282b71b9d34d1844c2c96c88cab04cc61',
-            'data/authoritative/Ibadan_LULC_2023_FINAL.tif':'e9e85c1dc0b64ea2943fe5983d409e6d7b6e2a5ece08d4dd90d19dc109f94ff7',
+            'data/authoritative/Ibadan_LULC_2013_FINAL.tif.tiff':'a5c3250f3044286ca29fc1ece13ddea282b71b9d34d1844c2c96c88cab04cc61',
+            'data/authoritative/Ibadan_LULC_2023_FINAL.tif.tiff':'e9e85c1dc0b64ea2943fe5983d409e6d7b6e2a5ece08d4dd90d19dc109f94ff7',
           }
           for p,h in expected.items():
               f=Path(p)
