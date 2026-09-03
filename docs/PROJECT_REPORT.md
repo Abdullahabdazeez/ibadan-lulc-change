@@ -1,46 +1,68 @@
-# Project Report: Ibadan Land-Cover Change, 2013–2023
+# Project Report: Ibadan Land-Cover Change and Urban Expansion, 2013–2023
 
-## Background
+## Project overview
 
-Ibadan has experienced substantial physical expansion over the past decade, making land-cover change an important planning issue. I developed this project to measure how the city's landscape changed between 2013 and 2023, identify the dominant land-cover transitions, and interpret what those changes mean for urban growth management.
+This project examines how the Ibadan metropolitan landscape changed between 2013 and 2023, with particular attention to the scale of urban expansion and the land-cover types converted as the built-up footprint grew.
 
-The analysis focuses on four broad classes: **Built-up, Vegetation, Water and Bare soil**.
+The analysis covers **3,220.581 km²** and maps four broad classes: **Built-up, Vegetation, Water and Bare soil**.
 
-## What I did
+## Planning question
 
-I prepared comparable Landsat imagery for 2013 and 2023 and used a Random Forest classifier to map the four land-cover classes. The predictor set combined six Landsat surface-reflectance bands with **NDVI, NDBI and MNDWI**.
+**How did Ibadan's land cover change between 2013 and 2023, and what types of land were converted as the city expanded?**
 
-I designed the validation process to keep model development separate from final evaluation. Reference samples were reviewed, calibration data were separated from an independent locked holdout, and the final model was evaluated only after the classification workflow had been fixed. Both years were then classified on the same **30 m** analysis grid to ensure that land-cover change was measured on a common spatial footprint.
+## Data and method
 
-## What I found
+I used Landsat Collection 2 Surface Reflectance imagery for the two study years. The predictor set combined six surface-reflectance bands — **SR_B2, SR_B3, SR_B4, SR_B5, SR_B6 and SR_B7** — with **NDVI, NDBI and MNDWI**.
 
-Built-up land increased from **99.866 km² in 2013 to 330.177 km² in 2023**, a net increase of **230.311 km²**.
+The 2013 and 2023 datasets were aligned to a common **30 m** analysis grid in **WGS 84 / UTM Zone 31N (EPSG:32631)**. A Random Forest classifier was used to map the four classes, followed by pixel-by-pixel post-classification change analysis.
 
-The clearest transition was from vegetation to built-up land. **246.104 km²** of land mapped as vegetation in 2013 was mapped as built-up in 2023, accounting for **99.14% of gross new built-up land** in the final transition analysis.
+## Validation
 
-The independent locked holdout contained 16 samples, with **14 of 16 cases classified correctly**. Overall accuracy was **87.50%**, with a **0.7935 Cohen's Kappa**. Because the holdout is small, the raw case count is reported alongside the percentage metrics.
+The accepted classification was evaluated with an independent **16-sample holdout**, of which **14 samples were correctly classified**.
 
-## What the result means
+| Metric | Result |
+|---|---:|
+| Overall Accuracy | 0.8750 |
+| Balanced Accuracy | 0.9259 |
+| Macro F1 | 0.6354 |
+| Cohen's Kappa | 0.7935 |
 
-The analysis points to substantial outward urban expansion and a large conversion of land previously mapped as vegetation. For planning, this strengthens the case for closer monitoring of peri-urban growth, better coordination between infrastructure provision and new development, and greater attention to green-area protection at the expanding urban edge.
+The holdout is small, so the raw **14/16** result is reported alongside the percentage-based metrics.
 
-The maps show where physical land-cover conversion occurred. They do not, on their own, establish the demographic, economic or policy drivers behind that change.
+## Results
 
-## Methodological considerations
+Built-up land increased from **99.866 km² (3.101%)** in 2013 to **330.177 km² (10.252%)** in 2023. This represents a net gain of **230.311 km²** and a **230.62%** increase relative to the 2013 built-up area.
 
-A larger independent reference sample would strengthen future accuracy assessment, while higher-resolution imagery could improve interpretation in areas where 30 m Landsat pixels contain mixtures of buildings, vegetation and bare surfaces.
+Vegetation declined by **230.331 km²** over the same period. The dominant mapped transition was **Vegetation → Built-up**, covering **246.104 km²**.
 
-A useful next step would be to relate the mapped expansion pattern to planning approvals, road development, population growth or land-market change using independent datasets designed for those questions.
+Gross new built-up land totalled **248.235 km²**, meaning **99.14%** of new built-up land had been classified as vegetation in 2013.
+
+Across the complete study area, **91.50%** remained in the same land-cover class and **8.50%** changed class.
+
+## Planning interpretation
+
+The results show substantial outward urban expansion associated primarily with conversion of vegetated land. This pattern has direct relevance for metropolitan planning because expansion at the urban edge can increase pressure on green/open land while also creating new infrastructure and service requirements.
+
+The evidence supports:
+
+- regular monitoring of urban growth fronts;
+- stronger coordination of infrastructure with new development;
+- integration of green-space protection into urban expansion strategies; and
+- periodic remote-sensing updates to support development management.
+
+The analysis measures physical land-cover conversion. Demographic, economic, land-market and regulatory drivers require complementary evidence and are not inferred directly from the imagery.
+
+## Limitations
+
+The independent holdout contains only 16 samples. Landsat's 30 m pixels may contain mixtures of buildings, roads, vegetation and exposed soil in heterogeneous urban areas. The four-class system also simplifies a more detailed landscape.
+
+The project is therefore most appropriate for **metropolitan-scale land-cover change and urban-growth interpretation**, rather than parcel-level development decisions.
 
 ## Main outputs
 
-The repository contains final land-cover maps, a 2013–2023 comparison, transition statistics, validation results and supporting methodology. Key numerical outputs are available in [`outputs/tables`](../outputs/tables/), while the main visual products are organised in [`outputs/maps`](../outputs/maps/) and [`outputs/charts`](../outputs/charts/).
+The repository contains final land-cover maps, change maps, statistical figures, transition tables and validation evidence. Numerical outputs are organised in [`outputs/tables`](../outputs/tables/), maps in [`outputs/maps`](../outputs/maps/) and charts in [`outputs/charts`](../outputs/charts/).
 
-## Professional takeaway
-
-This project demonstrates how satellite imagery and spatial analysis can move beyond describing urban growth to provide evidence for land-use monitoring, infrastructure planning and environmental management.
-
----
+## Author
 
 **Abdullah Abdazeez Ayomide**  
 Urban & Regional Planner · GIS & Remote Sensing · Spatial Decision Support
