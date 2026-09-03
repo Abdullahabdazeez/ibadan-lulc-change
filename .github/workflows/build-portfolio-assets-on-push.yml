@@ -1,0 +1,31 @@
+name: Build portfolio assets on branch
+
+on:
+  push:
+    branches: [portfolio-assets]
+    paths:
+      - 'scripts/generate_portfolio_assets.py'
+      - '.github/workflows/build-portfolio-assets-on-push.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: portfolio-assets
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install matplotlib numpy
+      - run: python scripts/generate_portfolio_assets.py
+      - name: Commit generated PNG assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add outputs/charts/portfolio_*.png
+          git diff --cached --quiet || git commit -m "Generate portfolio PNG assets"
+          git push origin HEAD:portfolio-assets
