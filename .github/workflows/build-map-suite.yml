@@ -4,10 +4,9 @@ on:
   push:
     branches: [portfolio-assets]
     paths:
-      - 'scripts/generate_map_suite.py'
-      - 'scripts/generate_map_suite_fixed.py'
+      - 'scripts/generate_map_suite_from_rasters.py'
       - '.github/workflows/build-map-suite.yml'
-      - 'outputs/maps/final_lulc_comparison.svg'
+      - 'data/authoritative/**'
       - 'data/processed/boundary/**'
   workflow_dispatch:
 
@@ -25,9 +24,25 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install map dependencies
-        run: pip install numpy pillow scipy matplotlib pyshp
+        run: pip install numpy pillow matplotlib rasterio geopandas pyogrio shapely
+      - name: Verify authoritative rasters
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          expected={
+            'data/authoritative/Ibadan_LULC_2013_FINAL.tif':'a5c3250f3044286ca29fc1ece13ddea282b71b9d34d1844c2c96c88cab04cc61',
+            'data/authoritative/Ibadan_LULC_2023_FINAL.tif':'e9e85c1dc0b64ea2943fe5983d409e6d7b6e2a5ece08d4dd90d19dc109f94ff7',
+          }
+          for p,h in expected.items():
+              f=Path(p)
+              assert f.exists(), f'Missing authoritative raster: {p}'
+              got=hashlib.sha256(f.read_bytes()).hexdigest()
+              assert got==h, f'Checksum mismatch for {p}: {got}'
+              print(p, 'SHA256_OK')
+          PY
       - name: Generate seven-map publication suite
-        run: python scripts/generate_map_suite_fixed.py
+        run: python scripts/generate_map_suite_from_rasters.py
       - name: Validate map outputs
         run: |
           python - <<'PY'
@@ -48,5 +63,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add outputs/maps/0*.png outputs/maps/0*.pdf
-          git diff --cached --quiet || git commit -m "Generate full portfolio map suite"
+          git diff --cached --quiet || git commit -m "Generate authoritative portfolio map suite"
           git push origin HEAD:portfolio-assets
