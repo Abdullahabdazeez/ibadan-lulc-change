@@ -30,13 +30,16 @@ The central finding is straightforward: **built-up land increased from about 100
 ## Visual evidence
 
 ### Land-cover area comparison
-<p align="center"><img src="outputs/charts/final_area_comparison.svg" alt="Land-cover area comparison" width="85%"></p>
+<p align="center"><img src="outputs/charts/portfolio_area_comparison.png" alt="Land-cover area comparison" width="85%"></p>
 
 ### Net land-cover change
-<p align="center"><img src="outputs/charts/final_change_summary.svg" alt="Net land-cover change" width="85%"></p>
+<p align="center"><img src="outputs/charts/portfolio_net_change.png" alt="Net land-cover change" width="85%"></p>
+
+### Origin of new built-up land
+<p align="center"><img src="outputs/charts/portfolio_new_builtup_origin.png" alt="Origin of new built-up land" width="80%"></p>
 
 ### Classification validation
-<p align="center"><img src="outputs/charts/final_validation.svg" alt="Classification validation" width="75%"></p>
+<p align="center"><img src="outputs/charts/portfolio_validation.png" alt="Classification validation" width="75%"></p>
 
 ## Method
 
